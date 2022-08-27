@@ -1,0 +1,13 @@
+.main-table {
+	text-align: start;
+	margin: 0 auto;
+
+}
+
+.main-title {
+	margin-bottom: 20px;
+}
+
+td {
+	width: 200px;
+}

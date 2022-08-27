@@ -1,0 +1,19 @@
+<form method="post" action="/<%= @task.id %>">
+  <input type="hidden" name="_method" value="put">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <div>
+    <label for="task">Task Name</label>
+    <input value="<%= @task.task %>" id="task" name="task" type="text" required>
+  </div>
+  <div>
+    <label>Day</label>
+    <input type="date" name="date" value="<%= @task.date %>" required>
+  </div>
+  <div>
+    <label>Time</label>
+    <input type="time" name="time" required>
+  </div>
+  <p>
+    <input type="submit" value="更新">
+  </p>
+</form>

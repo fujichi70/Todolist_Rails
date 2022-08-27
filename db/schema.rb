@@ -15,10 +15,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_24_120132) do
   enable_extension "plpgsql"
 
   create_table "tasks", force: :cascade do |t|
-    t.string "task"
+    t.string "email", null: false
+    t.string "task", null: false
     t.date "date"
-    t.datetime "created_at", precision: nil
-    t.datetime "updated_at", precision: nil
+    t.text "time"
+    t.integer "complete_flag"
+    t.date "created_at", null: false
+    t.date "updated_at"
   end
 
   create_table "users", force: :cascade do |t|

@@ -10,6 +10,9 @@
   </head>
   <body>
     <header>
+    <% curren_page?(root_path) do %>
+      <a href="">
+    <% end %>
     </header>
 
     <p class="notice"><%= notice %></p>
