@@ -1,0 +1,137 @@
+* {
+    margin: 0;
+    padding: 0;
+    color: #707070;
+    font-size: 1rem;
+}
+
+*,
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 100%;
+    font-weight: normal;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: bottom;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+}
+
+/* レイアウト（共通） */
+.box {
+    text-align: center;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.box-inner {
+    margin: 80px 50px 50px;
+}
+
+.title {
+    font-size: 1.75rem;
+    margin-bottom: 30px;
+    color: #3579e0;
+}
+
+/* ボタン（共通） */
+.btn {
+    border: 1px solid #3579e0;
+    background-color: #fff;
+    color: #3579e0;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+.btn:hover {
+    border: none;
+    background-color: #3579e0;
+    color: #fff;
+}
+
+/* 戻るボタン（共通） */
+.back-btn {
+    border: 1px solid #707070;
+    background-color: #fff;
+    color: #707070;
+}
+
+.back-btn:hover {
+    background-color: #707070;
+    color: #fff;
+}
+
+/* メニューバー（共通） */
+header {
+  display: flex;
+  align-items: center;
+  background-color: #bebebe;
+}
+
+.top-title {
+  font-size: 1.75rem;
+  width: 70px;
+  margin: 10px 40px;
+  margin-right: 60px;
+}
+
+ul {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+li {
+    margin: 0 10px;
+}
+
+nav li a {
+  color: #fff;
+}
+
+/* メッセージ欄（共通） */
+.notice {
+    color: #00b126;
+    text-align: center;
+}
+
+.alert {
+    color: #d10000;
+    text-align: center;
+}
+
+@media screen and (max-width: 590px) {
+    .box-inner {
+        margin: 50px 10px;
+    }
+}

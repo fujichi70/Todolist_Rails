@@ -1,11 +1,10 @@
 class TopController < ApplicationController
    before_action :move_to_signed_in, except: [:index]
-  #  before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
     @user = current_user.email
     @tasks = Task.where(complete_flag: nil)
-    # @times = Task.select(:time)
+    @completes = Task.where(complete_flag: 1)
   end
 
   def store
@@ -16,7 +15,7 @@ class TopController < ApplicationController
     task.date      = params[:date]
     task.time      = params[:time]
     task.complete_flag = nil
-    task.created_at = Time.now.strftime('%y-%m-%d')
+    task.created_at = Time.now.strftime('%Y-%m-%d')
     task.save
 
     redirect_to '/', notice: 'タスクを追加しました'
@@ -32,7 +31,7 @@ class TopController < ApplicationController
       task   = Task.find(id)
 
       task.complete_flag = 1
-      task.updated_at = Time.now.strftime('%y-%m-%d')
+      task.updated_at = Time.now.strftime('%Y-%m-%d')
       task.save
 
       redirect_to '/', notice: 'タスクを完了しました。'
@@ -45,7 +44,7 @@ class TopController < ApplicationController
     task.task       = params[:task]
     task.date      = params[:date]
     task.time      = params[:time]
-    task.updated_at = Time.now.strftime('%y-%m-%d')
+    task.updated_at = Time.now.strftime('%Y-%m-%d')
     task.save
 
     redirect_to '/', notice: 'タスクを更新しました。'

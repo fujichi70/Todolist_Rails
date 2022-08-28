@@ -8,4 +8,7 @@ Rails.application.routes.draw do
   post '/:id', to: 'top#complete'
   put '/:id', to: 'top#update'
   delete '/:id', to: 'top#destroy'
+
+  get '/done', to: 'done#index'
+  post '/done/:id', to: 'done#store'
 end

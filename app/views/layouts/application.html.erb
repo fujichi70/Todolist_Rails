@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ToDoList - Rails</title>
+    <title>Memo - Rails</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,13 @@
   </head>
   <body>
     <header>
+      <h1 class="top-title">Memo</h1>
+      <nav>
+        <ul>
+          <li><a href="/"><i class="fas fa-arrow-alt-circle-right"></i>Todo List</a></li>
+          <li><a href="/done">Done List</a></li>
+        </ul>
+      </nav>
     </header>
 
     <p class="notice"><%= notice %></p>
