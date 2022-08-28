@@ -63,3 +63,8 @@ a {
 	color: #3579E0;
 }
 
+/* ボタン（共通） */
+.btn {
+  border: 1px solid #3579E0;
+  background-color: #3579E0;
+}

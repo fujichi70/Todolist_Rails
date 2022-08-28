@@ -8,44 +8,36 @@
 		<input type="date" id="today" class="task-input--area" name="date">
 		<input type="time" class="task-input--area" name="time">
 		<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-   		<input class="task-btn" name="task-btn" type="submit" value="追加">
+   		<input class="task-btn btn" name="task-btn" type="submit" value="追加">
  	</form>
 
 </div>
-	
 	<div class="task-box">
-	<h2 class="main-title">やること一覧</h2>
-		<% @tasks.each do |t| %>
-	<form action="/<%= t.id %>" method="post">
-	<table class="main-table">
-		<thead>
-		<tr>
-			<th>やること</th>
-			<th colspan="2">日時</th>
-		</tr>
-		</thead>
-		<tbody>
-			<% if t.email == @user %>
-			<tr>
-			<td><%= t.task %></td>
-			<td><%= t.date %></td>
-			<td><%= t.time %></td>
-			<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-			<td><input type="submit" name="complete-btn" class="complete-btn" value="完了"></td>
-			<td><a href="/<%= t.id %>" class="edit-btn">編集</a></td>
-			<td>
-				<form method="post" action="/<%= t.id %>">
-					<input type="hidden" name="_method" value="delete">
-					<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-					<input type="submit" name="delete-btn" value="削除">
- 		    	</form>
-			</td>
-			</tr>
+		<h2 class="main-title">やること一覧</h2>
+		<table class="main-table">
+				<% @tasks.each do |t| %>
+				<% if t.email == @user %>
+				<tr>
+					<td><%= t.task %></td>
+					<td><%= t.date %> <%= t.time %></td>
+					<td>
+						<form action="/<%= t.id %>" method="post">
+							<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+							<input type="submit" name="complete-btn" class="complete-btn" value="完了">
+						</form>
+					</td>
+					<td><a href="/<%= t.id %>" class="edit-btn btn">編集</a></td>
+					<td>
+						<form method="post" action="/<%= t.id %>">
+							<input type="hidden" name="_method" value="delete">
+							<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+							<input type="submit" class="delete-btn btn" name="delete-btn" value="削除">
+						</form>
+					</td>
+				</tr>
+				<% end %>
 			<% end %>
-		</tbody>
-	</table>
-	</form>
-		<% end %>
+		</table>
 	</div>
 	</div>
 </div>
