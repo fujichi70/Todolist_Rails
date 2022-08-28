@@ -33,6 +33,9 @@ gem "bcrypt"
 # ログイン機能
 gem "devise"
 
+#devise日本語化
+gem 'devise-i18n'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
