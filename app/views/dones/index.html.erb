@@ -4,14 +4,16 @@
 
 		<div class="done-flex flex">
 			<div class="input-box">
-				<form action="/" method="post">
+				<form action="dones" method="post">
 					<div class="time-box">
-						<div id="dateTime"></div>
+						<h2 class="time-title">現在の時刻</h2>
+						<div id="dateTime" class="datetime"></div>
 					</div>
 					<div class="newtask-box">
-						<input type="text" class="task-input--area task-area" name="task" placeholder="やること">
+						<input type="text" class="task-input--area task-area" name="done" placeholder="やったこと">
 						<input type="date" id="today" class="task-input--area" name="date">
-						<input type="time" class="task-input--area" name="time">
+						<input type="time" class="task-input--area" name="start_time">
+						<input type="time" class="task-input--area" name="end_time">
 						<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 						<input class="task-btn btn" name="task-btn" type="submit" value="追加">
 					</div>
@@ -47,6 +49,5 @@
 			</div><!-- .done-box -->
 		</div>
 
-
-	</divv><!-- .box-inner -->
+	</div><!-- .box-inner -->
 </div><!-- .box -->
