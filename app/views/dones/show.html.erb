@@ -1,0 +1,33 @@
+<div class="box">
+	<div class="box-inner">
+		<h1 class="title">Todo List</h1>
+
+		<form method="post" action="/<%= @task.id %>">
+			<input type="hidden" name="_method" value="put">
+			<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+			<div class="edit-box">
+				<h2 class="main-title">編集画面</h2>
+
+				<ul>
+					<li>
+					<label for="task">やること</label>
+					<input class="task-input--area task-area" value="<%= @task.task %>" id="task" name="task" type="text" required>
+					</li>
+					<li>
+					<label>Day</label>
+					<input type="date" name="date" class="task-input--area" value="<%= @task.date %>">
+					</li>
+					<li>
+					<label>Time</label>
+					<input type="time" name="time" class="task-input--area">
+					</li>
+				</ul>
+				<input type="submit" class="btn" value="更新">
+				<%= link_to :back do %>
+					<input type="button" class="back-btn btn" value="戻る">
+				<% end %>
+			</div>
+		</form>
+
+	</div>
+</div>

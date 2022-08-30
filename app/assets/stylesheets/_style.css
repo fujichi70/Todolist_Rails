@@ -44,7 +44,12 @@ a {
 
 .flex {
     display: flex;
-    justify-content: center;
+}
+
+@media screen and (max-width: 590px) {
+    .flex {
+        flex-direction: column;
+    }
 }
 
 /* レイアウト（共通） */
@@ -95,7 +100,13 @@ a {
 header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   background-color: #bebebe;
+}
+
+.header-box {
+    display: flex;
+    align-items: center;
 }
 
 .top-title {
@@ -119,14 +130,21 @@ nav li a {
   color: #fff;
 }
 
+/* ログアウト（共通） */
+.logout {
+    padding: 0 10px;
+    color: #707070;
+}
+
 /* メッセージ欄（共通） */
 .notice {
     color: #00b126;
+    padding: 10px 0;
     text-align: center;
 }
 
 .alert {
-    color: #d10000;
+    padding: 10px 0;
     text-align: center;
 }
 

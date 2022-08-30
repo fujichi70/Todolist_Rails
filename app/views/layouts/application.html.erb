@@ -7,16 +7,28 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+     <%= javascript_importmap_tags %>
   </head>
   <body>
     <header>
-      <h1 class="top-title">Memo</h1>
-      <nav>
-        <ul>
-          <li><a href="/"><i class="fas fa-arrow-alt-circle-right"></i>Todo List</a></li>
-          <li><a href="/done">Done List</a></li>
-        </ul>
-      </nav>
+      <div class="header-box">
+        <h1 class="top-title">Memo</h1>
+        <nav>
+          <ul>
+            <li><a href="/">Todo List</a></li>
+            <li><a href="dones">Done List</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="user-action">
+        <% if user_signed_in? %>
+          <%= link_to 'Logout', 
+            destroy_user_session_path,
+            class: 'logout',
+            method: :delete
+          %>
+        <% end %>
+      </div>
     </header>
 
     <p class="notice"><%= notice %></p>

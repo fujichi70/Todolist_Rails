@@ -1,0 +1,11 @@
+/* レイアウト */
+.done-flex.flex {
+	justify-content: space-around;
+}
+
+/* 時間 */
+.time-box {
+	padding: 50px;
+	border-radius: 50%;
+	border: 1px solid #3579e0;
+}

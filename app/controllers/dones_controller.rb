@@ -4,8 +4,8 @@ class DonesController < ApplicationController
 	end
 	
 	def store
-		id      = params[:id]
-		@done = Done.find(id)
+		# id      = params[:id]
+		# @done = Done.find(id)
 	end
 
 end

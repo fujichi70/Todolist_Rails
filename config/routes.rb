@@ -1,14 +1,19 @@
 Rails.application.routes.draw do
-  root to: 'top#index'
+  root to: 'tops#index'
 
   devise_for :users
 
-  post '/', to: 'top#store'
-  get '/:id', to: 'top#show'
-  post '/:id', to: 'top#complete'
-  put '/:id', to: 'top#update'
-  delete '/:id', to: 'top#destroy'
+  devise_scope :user do
+    get '/users/sign_out' => 'devise/sessions#destroy'
+  end
 
-  get '/done', to: 'done#index'
-  post '/done/:id', to: 'done#store'
+  get 'dones', to: 'dones#index'
+  post 'dones/:id', to: 'dones#store'
+
+  post '/', to: 'tops#store'
+  get '/:id', to: 'tops#show'
+  post '/:id', to: 'tops#complete'
+  put '/:id', to: 'tops#update'
+  delete '/:id', to: 'tops#destroy'
+
 end
