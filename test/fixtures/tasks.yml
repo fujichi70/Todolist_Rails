@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  task: MyString
+  date: 2022-08-24
+  created_at: 2022-08-24 12:01:32
+  updated_at: 2022-08-24 12:01:32
+
+two:
+  task: MyString
+  date: 2022-08-24
+  created_at: 2022-08-24 12:01:32
+  updated_at: 2022-08-24 12:01:32

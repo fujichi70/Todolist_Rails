@@ -1,6 +1,19 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  root to: 'tops#index'
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  devise_for :users
+
+  devise_scope :user do
+    get '/users/sign_out' => 'devise/sessions#destroy'
+  end
+
+  get 'dones', to: 'dones#index'
+  post 'dones/:id', to: 'dones#store'
+
+  post '/', to: 'tops#store'
+  get '/:id', to: 'tops#show'
+  post '/:id', to: 'tops#complete'
+  put '/:id', to: 'tops#update'
+  delete '/:id', to: 'tops#destroy'
+
 end

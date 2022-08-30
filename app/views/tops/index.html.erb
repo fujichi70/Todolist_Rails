@@ -1,0 +1,58 @@
+<div class="box">
+	<div class="box-inner">
+		<h1 class="title">Todo List</h1>
+
+		<div class="newtask-box">
+			<form action="/" method="post">
+				<input type="text" class="task-input--area task-area" name="task" placeholder="やること">
+				<input type="date" id="today" class="task-input--area" name="date">
+				<input type="time" class="task-input--area" name="time">
+				<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+				<input class="task-btn btn" name="task-btn" type="submit" value="追加">
+			</form>
+		</div>
+
+		<div class="task-box">
+			<h2 class="main-title">やること一覧</h2>
+			<table class="main-table">
+					<% @tasks.each do |t| %>
+						<% if t.email == @user %>
+						<tr>
+							<td class="table-title"><%= t.task %></td>
+							<td class="table-daytime"><%= t.date %><span class="table-time"><%= t.time %></span></td>
+							<td>
+								<form action="/<%= t.id %>" method="post">
+									<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+									<input type="submit" name="complete-btn" class="complete-btn btn" value="完了">
+								</form>
+							</td>
+							<td><a href="/<%= t.id %>" class="edit-btn btn">編集</a></td>
+							<td>
+								<form method="post" action="/<%= t.id %>">
+									<input type="hidden" name="_method" value="delete">
+									<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+									<input type="submit" class="delete-btn btn" name="delete-btn" value="削除">
+								</form>
+							</td>
+						</tr>
+						<% end %>
+					<% end %>
+			</table>
+		</div><!-- .task-box -->
+
+		<% @completes.each do |c| %>
+			<% if Date.current.strftime('%Y年%m月%d日') == c.updated_at.strftime('%Y年%m月%d日') %>
+				<div class="complete-box">
+				<h2 class="complete-main--title">完了済み</h2>
+					<table class="complete-table">
+							<tr>
+								<td class="table-title"><span class="check">✓</span><%= c.task %></td>
+								<td class="table-daytime"><%= c.date %><span class="table-time"><%= c.time %></span></td>
+							</tr>
+					</table>
+				</div>
+			<% end %>
+		<% end %>
+
+	</div><!-- .box-inner -->
+</div><!-- .box -->

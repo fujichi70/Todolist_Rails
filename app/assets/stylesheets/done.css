@@ -1,0 +1,43 @@
+/* レイアウト */
+.done-flex.flex {
+	justify-content: space-around;
+}
+
+.input-box {
+	text-align: center;
+}
+
+.input-box .newtask-box .task-input--area {
+	display: block;
+	margin: 10px 0;
+}
+
+.input-box .newtask-box .task-btn {
+	font-size: 1.3rem;
+	padding: 10px 15px;
+}
+
+/* 時間 */
+.time-box {
+    border: 2px solid #548ccd;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 200px;
+    font-size: 1.45rem;
+	margin-bottom: 30px;
+}
+
+.time-box .time-title {
+    display: inline-block;
+    margin: 10px;
+}
+
+.time-box .datetime {
+    font-size: 1.7rem;
+    display: inline-block;
+    margin: 10px 0;
+}

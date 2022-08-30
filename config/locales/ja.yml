@@ -1,0 +1,6 @@
+ja:
+activerecord:
+  attributes:
+    user:
+      #カラム名：表示させたい日本語
+      # nickname: ニックネーム
