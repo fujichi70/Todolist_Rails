@@ -36,8 +36,6 @@ gem "devise"
 #devise日本語化
 gem 'devise-i18n'
 
-gem 'rufo'
-
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 

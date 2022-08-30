@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   end
 
   get 'dones', to: 'dones#index'
-  post 'dones/:id', to: 'dones#store'
+  post 'dones', to: 'dones#store'
 
   post '/', to: 'tops#store'
   get '/:id', to: 'tops#show'

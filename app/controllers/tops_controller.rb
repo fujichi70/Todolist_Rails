@@ -2,7 +2,6 @@ class TopsController < ApplicationController
 	before_action :move_to_signed_in, except: [:index]
 
 	def index
-		@user = current_user.email
 		@tasks = Task.where(complete_flag: nil)
 		@completes = Task.where(complete_flag: 1)
 	end
@@ -10,8 +9,8 @@ class TopsController < ApplicationController
 	def store
 		task = Task.new
 		
-		task.task       = params[:task]
 		task.email       = current_user.email
+		task.task       = params[:task]
 		task.date      = params[:date]
 		task.time      = params[:time]
 		task.complete_flag = nil

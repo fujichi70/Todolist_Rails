@@ -16,7 +16,7 @@
 			<h2 class="main-title">やること一覧</h2>
 			<table class="main-table">
 					<% @tasks.each do |t| %>
-						<% if t.email == @user %>
+						<% if t.email == current_user.email %>
 						<tr>
 							<td class="table-title"><%= t.task %></td>
 							<td class="table-daytime"><%= t.date %><span class="table-time"><%= t.time %></span></td>

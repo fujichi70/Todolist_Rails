@@ -12,40 +12,36 @@
 					<div class="newtask-box">
 						<input type="text" class="task-input--area task-area" name="done" placeholder="やったこと">
 						<input type="date" id="today" class="task-input--area" name="date">
-						<input type="time" class="task-input--area" name="start_time">
-						<input type="time" class="task-input--area" name="end_time">
+						<%# <input type="time" class="task-input--area" name="start_time">
+						<input type="time" class="task-input--area" name="end_time"> %>
 						<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-						<input class="task-btn btn" name="task-btn" type="submit" value="追加">
+						<div class="btn-box">
+							<input id="startBtn" class="task-btn btn" name="start_btn" type="submit" value="開始">
+							<input id="endBtn" class="task-btn end-btn btn" name="end_btn" type="submit" value="終了">
+						</div>
 					</div>
 				</form>
 			</div>
 	
 			<div class="done-box">
 				<h2 class="main-title">やったこと一覧</h2>
-				<table class="main-table">
 						<% @done.each do |d| %>
-							<% if d.email == @user %>
-							<tr>
-								<td class="table-title"><%= d.task %></td>
-								<td class="table-daytime"><%= d.date %><span class="table-time"><%= d.time %></span></td>
-								<td>
-									<form action="/<%= d.id %>" method="post">
-										<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-										<input type="submit" name="complete-btn" class="complete-btn btn" value="完了">
-									</form>
-								</td>
-								<td><a href="/<%= d.id %>" class="edit-btn btn">編集</a></td>
-								<td>
-									<form method="post" action="/<%= d.id %>">
-										<input type="hidden" name="_method" value="delete">
-										<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-										<input type="submit" class="delete-btn btn" name="delete-btn" value="削除">
-									</form>
-								</td>
-							</tr>
+							<% if d.email == current_user.email %>
+								<h3 class="done-day"><%= d.date %></h3>
+									<ul>
+										<li class="done-title"><%= d.done %></li>
+										<li class="done-daytime"><%= d.start_time %> ～ <%= d.end_time %></li>
+										<li><a href="/<%= d.id %>" class="edit-btn btn">編集</a></li>
+										<li>
+											<form method="post" action="dones/<%= d.id %>">
+												<input type="hidden" name="_method" value="delete">
+												<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+												<input type="submit" class="delete-btn btn" name="delete-btn" value="削除">
+											</form>
+										</li>
+									</ul>
 							<% end %>
 						<% end %>
-				</table>
 			</div><!-- .done-box -->
 		</div>
 
