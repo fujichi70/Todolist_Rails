@@ -7,45 +7,65 @@ class DonesController < ApplicationController
 	
 	def store
 		
-		if params[:start_btn].present?
-			time = 
-			session[:done]       = params[:done]
-			session[:date]       = params[:date]
-			session[:start_time] = Time.now.strftime('%H:%M:%S')
-			session[:created_at] = Time.now.strftime('%Y-%m-%d')
-			redirect_to '/dones'
-		else
-			if session[:start_time].present?
-				done = Done.new
-				
-				if session[:done].present?
-					done.done = session[:done]
-				elsif params[:done].present?
-					done.done = params[:done]
-				else
-					redirect_to '/dones' , alert: '最初からやり直してください'
-				end
-				
-				if session[:date].present?
-					done.date = session[:date]
-				elsif params[:date].present?
-					done.date = params[:date]
-				else
-					redirect_to '/dones' , alert: '最初からやり直してください'
-				end
-				
-				done.email      = current_user.email
-				done.start_time = session[:start_time]
-				done.end_time   = Time.now.strftime('%H:%M:%S')
-				done.created_at = session[:created_at]
-				done.save
-				
-				session.clear
-				redirect_to '/dones', notice: 'やったことを追加しました'
+		if params[:start_btn].present? || params[:end_btn].present?
+			if params[:start_btn].present?
+				time = 
+				session[:done]       = params[:done]
+				session[:date]       = params[:date]
+				session[:start_time] = Time.now.strftime('%H:%M:%S')
+				session[:created_at] = Time.now.strftime('%Y-%m-%d')
+
+				params[:start_btn] = ''
+				redirect_to '/dones'
 			else
-				redirect_to '/dones' , alert: '最初からやり直してください'
-			end	
-		end	
+				if session[:start_time].present?
+					done = Done.new
+					
+					if session[:done].present?
+						done.done = session[:done]
+					elsif params[:done].present?
+						done.done = params[:done]
+					else
+						redirect_to '/dones' , alert: '最初からやり直してください'
+					end
+					
+					if session[:date].present?
+						done.date = session[:date]
+					elsif params[:date].present?
+						done.date = params[:date]
+					else
+						redirect_to '/dones' , alert: '最初からやり直してください'
+					end
+					
+					done.email      = current_user.email
+					done.start_time = session[:start_time]
+					done.end_time   = Time.now.strftime('%H:%M:%S')
+					done.created_at = session[:created_at]
+					done.save
+					
+					params[:end_btn] = ''
+					session.clear
+					redirect_to '/dones', notice: 'やったことを追加しました'
+				else
+					redirect_to '/dones' , alert: '最初からやり直してください'
+				end	
+			end
+		elsif params[:add_btn].present?
+			done = Done.new
+		
+			done.email       = current_user.email
+			done.done       = params[:done]
+			done.date      = params[:date]
+			done.start_time      = params[:start_time]
+			done.end_time      = params[:end_time]
+			done.created_at = Time.now.strftime('%Y-%m-%d')
+			done.save
+			
+			params[:add_btn] = ''
+			redirect_to '/dones', notice: 'やったことを追加しました'
+		else
+			redirect_to '/dones', notice: '最初からやり直してください'
+		end
 		
 	end
 
@@ -59,14 +79,14 @@ class DonesController < ApplicationController
 		done.updated_at = Time.now.strftime('%Y-%m-%d')
 		done.save
 
-		redirect_to '/', notice: 'やったことを更新しました。'
+		redirect_to '/dones', notice: 'やったことを更新しました。'
 	end
 
 	def destroy
 		id = params[:id]
 		done = Done.find(id)
 		done.destroy
-		redirect_to '/', notice: 'やったことを削除しました。'
+		redirect_to '/dones', notice: 'やったことを削除しました。'
 	end
 
 	private

@@ -1,6 +1,7 @@
 /* レイアウト */
 .done-flex.flex {
     justify-content: space-around;
+    margin-bottom: 20px;
 }
 
 .input-box {
