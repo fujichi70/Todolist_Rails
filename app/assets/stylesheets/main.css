@@ -110,6 +110,7 @@ td {
   .task-area {
     display: block;
     margin: 0 auto 10px;
+    width: 280px;
   }
 
   .task-btn {

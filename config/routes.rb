@@ -9,6 +9,9 @@ Rails.application.routes.draw do
 
   get 'dones', to: 'dones#index'
   post 'dones', to: 'dones#store'
+  put 'dones/:id', to: 'dones#update'
+  delete 'dones/:id', to: 'dones#destroy'
+  post 'dones/add', to: 'dones#add'
 
   post '/', to: 'tops#store'
   get '/:id', to: 'tops#show'
