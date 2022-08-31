@@ -17,6 +17,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_27_095740) do
   create_table "dones", force: :cascade do |t|
     t.string "email", null: false
     t.string "done", null: false
+    t.text "description"
     t.date "date", null: false
     t.text "start_time", null: false
     t.text "end_time", null: false
