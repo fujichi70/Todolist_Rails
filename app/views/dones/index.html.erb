@@ -3,46 +3,62 @@
 		<h1 class="title">Done List</h1>
 
 		<div class="done-flex flex">
-			<div class="input-box">
-				<form action="dones" method="post">
-					<div class="time-box">
-						<h2 class="time-title">現在の時刻</h2>
-						<div id="dateTime" class="datetime"></div>
-					</div>
-					<div class="newtask-box">
-						<input type="text" class="task-input--area task-area" name="done" placeholder="やったこと">
-						<input type="date" id="today" class="task-input--area" name="date">
-						<%# <input type="time" class="task-input--area" name="start_time">
-						<input type="time" class="task-input--area" name="end_time"> %>
-						<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-						<div class="btn-box">
-							<input id="startBtn" class="task-btn btn" name="start_btn" type="submit" value="開始">
-							<input id="endBtn" class="task-btn end-btn btn" name="end_btn" type="submit" value="終了">
+			<div class="main-group">
+				<div class="input-box">
+					<form action="dones" method="post">
+						<div class="time-box">
+							<h2 class="time-title">現在の時刻</h2>
+							<div id="dateTime" class="datetime"></div>
 						</div>
-					</div>
-				</form>
-			</div>
+						<div class="newtask-box">
+							<input type="text" class="task-input--area task-area" name="done" placeholder="やったこと">
+							<input type="date" id="today" class="task-input--area" name="date">
+							<%# <input type="time" class="task-input--area" name="start_time">
+							<input type="time" class="task-input--area" name="end_time"> %>
+							<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+							<div class="btn-box">
+								<input id="startBtn" class="task-btn btn" name="start_btn" type="submit" value="開始">
+								<input id="endBtn" class="task-btn end-btn btn" name="end_btn" type="submit" value="終了">
+							</div>
+						</div>
+					</form>
+				</div>
 	
+				<% if session[:start_time].present? %>
+					<div class="tmp-box">
+						<h2 class="tmp-main--title">取り掛かり中</h2>
+						<ul>
+							<li class="tmp-list tmp-title"><%= session[:done] %></li>
+							<li class="tmp-list"><%= session[:date] %></li>
+							<li class="tmp-list"><%= session[:start_time] %></li>
+						</ul>
+					</div>
+				<% end 	%>
+			</div><!-- .main-group -->
+
 			<div class="done-box">
-				<h2 class="main-title">やったこと一覧</h2>
-						<% @done.each do |d| %>
-							<% if d.email == current_user.email %>
-								<h3 class="done-day"><%= d.date %></h3>
-									<ul>
-										<li class="done-title"><%= d.done %></li>
-										<li class="done-daytime"><%= d.start_time %> ～ <%= d.end_time %></li>
-										<li><a href="/<%= d.id %>" class="edit-btn btn">編集</a></li>
-										<li>
-											<form method="post" action="dones/<%= d.id %>">
-												<input type="hidden" name="_method" value="delete">
-												<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-												<input type="submit" class="delete-btn btn" name="delete-btn" value="削除">
-											</form>
-										</li>
-									</ul>
-							<% end %>
-						<% end %>
+				<h2 class="main-title done-main--title"><span class="done-day"><%= Time.now.strftime("%Y年%m月%d日") %></span>やったこと一覧</h2>
+				<% @done.each do |d| %>
+					<% if d.email == current_user.email %>
+						<ul>
+							<li class="done-title"><%= d.done %></li>
+							<li class="done-daytime"><%= d.start_time %> ～ <%= d.end_time %></li>
+							<li><a href="/<%= d.id %>" class="edit-btn btn">編集</a></li>
+							<li>
+								<form method="post" action="dones/<%= d.id %>">
+									<input type="hidden" name="_method" value="delete">
+									<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+									<input type="submit" class="delete-btn btn" name="delete-btn" value="削除">
+								</form>
+							</li>
+						</ul>
+					<% end %>
+				<% end %>
 			</div><!-- .done-box -->
+		</div><!-- .done-flex -->
+
+		<div class="add-box">
+			<p><a href="dones/add">別にやったことを入力</a></p>
 		</div>
 
 	</div><!-- .box-inner -->

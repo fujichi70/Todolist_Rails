@@ -50,7 +50,8 @@ class TopsController < ApplicationController
 	end
 
 	def destroy
-		task       = Task.find(params[:id])
+		id = params[:id]
+		task       = Task.find(id)
 		task.destroy
 		redirect_to '/', notice: 'タスクを削除しました。'
 	end

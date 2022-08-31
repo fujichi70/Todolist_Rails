@@ -1,6 +1,8 @@
 class DonesController < ApplicationController
+	before_action :move_to_signed_in
+	
 	def index
-		@done = Done.all
+		@done = Done.where(:date == Time.now.strftime("%Y-%m-%d"))
 	end
 	
 	def store
@@ -38,7 +40,7 @@ class DonesController < ApplicationController
 				done.created_at = session[:created_at]
 				done.save
 				
-				session = ''
+				session.clear
 				redirect_to '/dones', notice: 'やったことを追加しました'
 			else
 				redirect_to '/dones' , alert: '最初からやり直してください'
@@ -46,5 +48,34 @@ class DonesController < ApplicationController
 		end	
 		
 	end
+
+	def update
+		id   = params[:id]
+		done = Done.find(id)
+
+		done.done      = params[:done]
+		done.date      = params[:date]
+		done.time      = params[:time]
+		done.updated_at = Time.now.strftime('%Y-%m-%d')
+		done.save
+
+		redirect_to '/', notice: 'やったことを更新しました。'
+	end
+
+	def destroy
+		id = params[:id]
+		done = Done.find(id)
+		done.destroy
+		redirect_to '/', notice: 'やったことを削除しました。'
+	end
+
+	private
+		def move_to_signed_in
+			unless user_signed_in?
+			#サインインしていないユーザーはログインページが表示される
+			redirect_to  '/users/sign_in'
+		end
+	end
+
 
 end

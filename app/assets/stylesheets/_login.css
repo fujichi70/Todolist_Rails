@@ -1,7 +1,104 @@
-.login-sub-title {
-  font-size: 1.5rem;
-  margin-bottom: 20px;
+/* 背景動画 */
+.video-box {
+    z-index: -10;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
 }
 
-.login-btn {
+.video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+/* テキスト部分 */
+.text-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+/* 透明被せる */
+.clear-sheet {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 420px;
+    background-color: rgb(255, 255, 255);
+    opacity: 0.6;
+    z-index: -1;
+}
+
+.login-sub-title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.login-flex {
+    display: flex;
+}
+
+.login-email {
+    margin-bottom: 10px;
+}
+
+.login-text {
+    width: 100px;
+}
+
+.login-forget {
+    margin: 10px 0 20px;
+}
+
+.login-forget a {
+    border-bottom: 1px solid #000;
+    display: inline-block;
+}
+.login-forget a:hover {
+    opacity: 0.7;
+}
+
+.login-btn .btn {
+}
+
+.login-btn--parts {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.login-input-area {
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+.newuser-text {
+	margin-bottom: 10px;
+}
+
+.newuser-btn--parts {
+    text-align: center;
+}
+
+.newuser-btn--parts .btn {
+    border: 1px solid #707070;
+    color: #707070;
+}
+
+.newuser-btn:hover {
+    background-color: #707070;
 }
