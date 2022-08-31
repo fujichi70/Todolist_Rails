@@ -13,6 +13,7 @@
 						<div class="newtask-box">
 							<input type="text" class="task-input--area task-area" name="done" placeholder="やったこと">
 							<input type="date" id="today" class="task-input--area" name="date">
+							<input type="text" class="task-input--area" name="description" placeholder="詳細">
 							<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 							<div class="btn-box">
 								<input type="submit" id="startBtn" class="task-btn btn" name="start_btn" value="開始">
@@ -35,7 +36,7 @@
 			</div><!-- .main-group -->
 
 			<div class="done-box">
-				<h2 class="main-title done-main--title"><span class="done-day"><%= Time.now.strftime("%Y年%m月%d日") %></span>やったこと一覧</h2>
+				<h2 class="main-title done-main--title"><span class="done-day"><%= Time.current.strftime("%Y年%m月%d日") %></span>やったこと一覧</h2>
 				<% @done.each do |d| %>
 					<% if d.email == current_user.email %>
 						<ul>
@@ -63,11 +64,16 @@
 					<input type="date" id="today" class="task-input--area" name="date">
 					<input type="time" class="task-input--area" name="start_time">
 					<input type="time" class="task-input--area" name="end_time">
+					<input type="text" class="task-input--area" name="description" placeholder="詳細">
 					<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 					<input type="submit" class="add-btn btn" name="add_btn" value="追加">
 				</form>
 			</div>
 		</div>
+
+		<%= link_to dones_csv_path do %>
+			<input type="button" class="btn" value="csv出力">
+		<% end %>
 
 	</div><!-- .box-inner -->
 </div><!-- .box -->
