@@ -94,7 +94,8 @@ class DonesController < ApplicationController
 	def csv
 		@user = User.select(:email)
 		@done = Done.where(:email == @user)
-
+		
+		# csv出力
 		respond_to do |format|
 			format.html
 			format.csv do
@@ -104,18 +105,16 @@ class DonesController < ApplicationController
 	end
 
 	private
-		# csv出力
+		# 出力データ生成
 		def csv_output(dones)
 			require 'csv'
 
 			user  = current_user.email
 
-			#ファイル名を指定 ここはお好みで
 			filename = "done_" + Time.current.strftime("%Y%m%d")
 			bom = "\uFEFF"
 
 			csv1 = CSV.generate(bom) do |csv|
-				#カラム名を1行目として入れる
 				column_names =["Subject", "Start date", "Start time", "End time", "Description"]
 
 				csv << column_names
@@ -135,11 +134,9 @@ class DonesController < ApplicationController
 
 		# csvファイル生成
 		def create_csv(filename, csv1)
-			#ファイル書き込み
 			File.open("./#{filename}.csv", "w", encoding: "UTF-8") do |file|
 			file.write(csv1)
 			end
-			#send_fileを使ってCSVファイル作成後に自動でダウンロードされるようにする
 			stat = File::stat("./#{filename}.csv")
 			send_file("./#{filename}.csv", filename: "#{filename}.csv", length: stat.size)
 		end
