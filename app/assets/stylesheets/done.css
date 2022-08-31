@@ -85,6 +85,11 @@
     margin-top: 30px;
 }
 
+/* 別途やったことを追加 */
+.add-title {
+    margin-bottom: 10px;
+}
+
 /* やったこと一覧 */
 .main-title.done-main--title {
     font-weight: bold;
