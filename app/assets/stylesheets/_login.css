@@ -37,7 +37,7 @@
     -moz-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     width: 400px;
-    height: 420px;
+    height: 430px;
     background-color: rgb(255, 255, 255);
     opacity: 0.6;
     z-index: -1;
@@ -51,6 +51,7 @@
 
 .devise-flex {
     display: flex;
+    align-items: center;
 }
 
 .devise-email {
@@ -97,6 +98,15 @@
     color: #707070;
 }
 
-.newuser-btn:hover {
+.newuser-btn--parts .btn:hover {
     background-color: #707070;
+}
+
+/* 新規登録 */
+.registration-pass {
+    margin-bottom: 10px;
+}
+
+.registration-notice {
+    font-size: 0.8em;
 }
