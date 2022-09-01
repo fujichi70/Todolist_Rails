@@ -43,42 +43,42 @@
     z-index: -1;
 }
 
-.login-sub-title {
+.devise-sub-title {
     font-size: 1.5rem;
     margin-bottom: 20px;
     text-align: center;
 }
 
-.login-flex {
+.devise-flex {
     display: flex;
 }
 
-.login-email {
+.devise-email {
     margin-bottom: 10px;
 }
 
-.login-text {
+.devise-text {
     width: 100px;
 }
 
-.login-forget {
+.devise-forget {
     margin: 10px 0 20px;
 }
 
-.login-forget a {
+.devise-forget a {
     border-bottom: 1px solid #000;
     display: inline-block;
 }
-.login-forget a:hover {
+.devise-forget a:hover {
     opacity: 0.7;
 }
 
-.login-btn--parts {
+.devise-btn--parts {
     margin-bottom: 20px;
     text-align: center;
 }
 
-.login-input--area {
+.devise-input--area {
     padding: 5px 15px;
     border-radius: 20px;
     border: 1px solid #707070;
