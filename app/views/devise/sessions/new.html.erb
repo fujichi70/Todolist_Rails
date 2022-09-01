@@ -11,14 +11,12 @@
 			<%= f.email_field :email, autofocus: true, autocomplete: "email", class: "login-input--area" %>
 		</div>
 		<div class="login-password">
-			<div class="login-input--text">
 			<div class="login-password--box login-flex">
 				<%= f.label :password, "password", class: "login-text" %>
 					<%= f.password_field :password, autocomplete: "current-password", class: "login-input--area" %>
 			</div>
 			<div class="login-forget">
 				<%= link_to "パスワードを忘れた場合", new_user_password_path %>
-			</div>
 			</div>
 		</div>
 		<div class="login-btn">
