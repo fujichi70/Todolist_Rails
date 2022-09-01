@@ -2,7 +2,6 @@ class TopsController < ApplicationController
 	before_action :move_to_signed_in, except: [:index]
 
 	def index
-		@user = current_user.email
 		@tasks = Task.where(complete_flag: nil)
 		@completes = Task.where(complete_flag: 1)
 	end
@@ -10,12 +9,12 @@ class TopsController < ApplicationController
 	def store
 		task = Task.new
 		
-		task.task       = params[:task]
 		task.email       = current_user.email
+		task.task       = params[:task]
 		task.date      = params[:date]
 		task.time      = params[:time]
 		task.complete_flag = nil
-		task.created_at = Time.now.strftime('%Y-%m-%d')
+		task.created_at = Time.current.strftime('%Y-%m-%d')
 		task.save
 
 		redirect_to '/', notice: 'タスクを追加しました'
@@ -31,7 +30,7 @@ class TopsController < ApplicationController
 		task   = Task.find(id)
 
 		task.complete_flag = 1
-		task.updated_at = Time.now.strftime('%Y-%m-%d')
+		task.updated_at = Time.current.strftime('%Y-%m-%d')
 		task.save
 
 		redirect_to '/', notice: 'タスクを完了しました。'
@@ -44,22 +43,23 @@ class TopsController < ApplicationController
 		task.task       = params[:task]
 		task.date      = params[:date]
 		task.time      = params[:time]
-		task.updated_at = Time.now.strftime('%Y-%m-%d')
+		task.updated_at = Time.current.strftime('%Y-%m-%d')
 		task.save
 
 		redirect_to '/', notice: 'タスクを更新しました。'
 	end
 
 	def destroy
-		task       = Task.find(params[:id])
+		id = params[:id]
+		task       = Task.find(id)
 		task.destroy
 		redirect_to '/', notice: 'タスクを削除しました。'
 	end
 
 	private
+		# ログインしてない場合ログインページに遷移
 		def move_to_signed_in
 			unless user_signed_in?
-			#サインインしていないユーザーはログインページが表示される
 			redirect_to  '/users/sign_in'
 		end
 	end

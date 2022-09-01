@@ -8,7 +8,10 @@ Rails.application.routes.draw do
   end
 
   get 'dones', to: 'dones#index'
-  post 'dones/:id', to: 'dones#store'
+  post 'dones', to: 'dones#store'
+  put 'dones/:id', to: 'dones#update'
+  delete 'dones/:id', to: 'dones#destroy'
+  get 'dones/csv', to: 'dones#csv'
 
   post '/', to: 'tops#store'
   get '/:id', to: 'tops#show'

@@ -3,51 +3,77 @@
 		<h1 class="title">Done List</h1>
 
 		<div class="done-flex flex">
+			<div class="main-group">
+				<div class="input-box">
+					<form action="dones" method="post">
+						<div class="time-box">
+							<h2 class="time-title">現在の時刻</h2>
+							<div id="dateTime" class="datetime"></div>
+						</div>
+						<div class="newtask-box">
+							<input type="text" class="task-input--area task-area" name="done" placeholder="やったこと">
+							<input type="date" id="today" class="task-input--area" name="date">
+							<input type="text" class="task-input--area" name="description" placeholder="詳細">
+							<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+							<div class="btn-box">
+								<input type="submit" id="startBtn" class="task-btn btn" name="start_btn" value="開始">
+								<input type="submit" id="endBtn" class="task-btn end-btn btn" name="end_btn" value="終了">
+							</div>
+						</div>
+					</form>
+				</div>
+	
+				<% if session[:start_time].present? %>
+					<div class="tmp-box">
+						<h2 class="tmp-main--title">取り掛かり中</h2>
+						<ul>
+							<li class="tmp-list tmp-title"><%= session[:done] %></li>
+							<li class="tmp-list"><%= session[:date] %></li>
+							<li class="tmp-list"><%= session[:start_time] %></li>
+						</ul>
+					</div>
+				<% end 	%>
+			</div><!-- .main-group -->
+
+			<div class="done-box">
+				<h2 class="main-title done-main--title"><span class="done-day"><%= Time.current.strftime("%Y年%m月%d日") %></span>やったこと一覧</h2>
+				<% @done.each do |d| %>
+					<% if d.email == current_user.email %>
+						<ul>
+							<li class="done-title"><%= d.done %></li>
+							<li class="done-daytime"><%= d.start_time %> ～ <%= d.end_time %></li>
+							<li><a href="/<%= d.id %>" class="edit-btn btn">編集</a></li>
+							<li>
+								<form method="post" action="dones/<%= d.id %>">
+									<input type="hidden" name="_method" value="delete">
+									<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+									<input type="submit" class="delete-btn btn" name="delete-btn" value="削除">
+								</form>
+							</li>
+						</ul>
+					<% end %>
+				<% end %>
+			</div><!-- .done-box -->
+		</div><!-- .done-flex -->
+
+		<div class="add-box">
+			<p class="add-title">別にやったことを入力</p>
 			<div class="input-box">
 				<form action="dones" method="post">
-					<div class="time-box">
-						<h2 class="time-title">現在の時刻</h2>
-						<div id="dateTime" class="datetime"></div>
-					</div>
-					<div class="newtask-box">
-						<input type="text" class="task-input--area task-area" name="done" placeholder="やったこと">
-						<input type="date" id="today" class="task-input--area" name="date">
-						<input type="time" class="task-input--area" name="start_time">
-						<input type="time" class="task-input--area" name="end_time">
-						<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-						<input class="task-btn btn" name="task-btn" type="submit" value="追加">
-					</div>
+					<input type="text" class="task-input--area task-area" name="done" placeholder="やったこと">
+					<input type="date" id="today" class="task-input--area" name="date">
+					<input type="time" class="task-input--area" name="start_time">
+					<input type="time" class="task-input--area" name="end_time">
+					<input type="text" class="task-input--area" name="description" placeholder="詳細">
+					<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+					<input type="submit" class="add-btn btn" name="add_btn" value="追加">
 				</form>
 			</div>
-	
-			<div class="done-box">
-				<h2 class="main-title">やったこと一覧</h2>
-				<table class="main-table">
-						<% @done.each do |d| %>
-							<% if d.email == @user %>
-							<tr>
-								<td class="table-title"><%= d.task %></td>
-								<td class="table-daytime"><%= d.date %><span class="table-time"><%= d.time %></span></td>
-								<td>
-									<form action="/<%= d.id %>" method="post">
-										<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-										<input type="submit" name="complete-btn" class="complete-btn btn" value="完了">
-									</form>
-								</td>
-								<td><a href="/<%= d.id %>" class="edit-btn btn">編集</a></td>
-								<td>
-									<form method="post" action="/<%= d.id %>">
-										<input type="hidden" name="_method" value="delete">
-										<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-										<input type="submit" class="delete-btn btn" name="delete-btn" value="削除">
-									</form>
-								</td>
-							</tr>
-							<% end %>
-						<% end %>
-				</table>
-			</div><!-- .done-box -->
 		</div>
+
+		<%= link_to dones_csv_path do %>
+			<input type="button" class="btn" value="csv出力">
+		<% end %>
 
 	</div><!-- .box-inner -->
 </div><!-- .box -->

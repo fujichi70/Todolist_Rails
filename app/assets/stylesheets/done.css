@@ -1,20 +1,21 @@
 /* レイアウト */
 .done-flex.flex {
-	justify-content: space-around;
+    justify-content: space-around;
+    margin-bottom: 20px;
 }
 
 .input-box {
-	text-align: center;
+    margin-bottom: 50px;
 }
 
 .input-box .newtask-box .task-input--area {
-	display: block;
-	margin: 10px 0;
+    display: block;
+    margin: 10px 0;
 }
 
 .input-box .newtask-box .task-btn {
-	font-size: 1.3rem;
-	padding: 10px 15px;
+    font-size: 1.3rem;
+    padding: 10px 15px;
 }
 
 /* 時間 */
@@ -26,9 +27,9 @@
     align-items: center;
     justify-content: center;
     width: 200px;
-    height: 200px;
+    height: 150px;
     font-size: 1.45rem;
-	margin-bottom: 30px;
+    margin: 0 auto 30px;
 }
 
 .time-box .time-title {
@@ -40,4 +41,94 @@
     font-size: 1.7rem;
     display: inline-block;
     margin: 10px 0;
+}
+
+.btn-box {
+    display: flex;
+    justify-content: space-around;
+}
+
+.end-btn {
+    border: 1px solid #d10000;
+    color: #d10000;
+}
+
+.end-btn:hover {
+    background-color: #d10000;
+}
+
+/* 取り掛かり中 */
+.tmp-box {
+    margin-bottom: 30px;
+    border: 1px solid #548ccd;
+    border-radius: 20px;
+    position: relative;
+    height: 100px;
+}
+
+.tmp-main--title {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    background: #fff;
+    border-radius: 20px;
+    padding: 10px 20px;
+    position: absolute;
+    top: -20px;
+    left: 70px;
+}
+
+.tmp-title {
+    font-weight: bold;
+}
+
+.tmp-list {
+    margin-top: 30px;
+}
+
+/* 別途やったことを追加 */
+.add-title {
+    margin-bottom: 10px;
+}
+
+/* やったこと一覧 */
+.main-title.done-main--title {
+    font-weight: bold;
+    text-align: left;
+    font-size: 1.3rem;
+}
+
+.done-day {
+    font-size: 1.3rem;
+    margin-right: 10px;
+}
+
+.done-title {
+    list-style: circle;
+}
+
+.done-box ul {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.done-box li {
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+
+@media screen and (max-width: 890px) {
+    .done-flex.flex {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 590px) {
+
+    .input-box {
+        margin-bottom: 50px;
+    }
 }

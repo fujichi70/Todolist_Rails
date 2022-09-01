@@ -1,7 +1,6 @@
 * {
     margin: 0;
     padding: 0;
-    color: #707070;
     font-size: 1rem;
 }
 
@@ -42,6 +41,11 @@ a {
     color: #000;
 }
 
+button {
+    border: none;
+    background: none;
+}
+
 .flex {
     display: flex;
 }
@@ -54,6 +58,7 @@ a {
 
 /* レイアウト（共通） */
 .box {
+    color: #707070;
     text-align: center;
     max-width: 1000px;
     margin: 0 auto;
@@ -67,6 +72,7 @@ a {
     font-size: 1.75rem;
     margin-bottom: 30px;
     color: #3579e0;
+    text-align: center;
 }
 
 /* ボタン（共通） */
@@ -76,6 +82,7 @@ a {
     color: #3579e0;
     padding: 5px 10px;
     border-radius: 20px;
+    cursor: pointer;
 }
 
 .btn:hover {
@@ -98,10 +105,10 @@ a {
 
 /* メニューバー（共通） */
 header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #bebebe;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #bebebe;
 }
 
 .header-box {
@@ -110,10 +117,10 @@ header {
 }
 
 .top-title {
-  font-size: 1.75rem;
-  width: 70px;
-  margin: 10px 40px;
-  margin-right: 60px;
+    font-size: 1.75rem;
+    width: 70px;
+    margin: 10px 40px;
+    margin-right: 60px;
 }
 
 ul {
@@ -127,7 +134,7 @@ li {
 }
 
 nav li a {
-  color: #fff;
+    color: #fff;
 }
 
 /* ログアウト（共通） */

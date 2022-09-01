@@ -11,6 +11,7 @@
   </head>
   <body>
     <header>
+        <% if user_signed_in? %>
       <div class="header-box">
         <h1 class="top-title">Memo</h1>
         <nav>
@@ -21,14 +22,13 @@
         </nav>
       </div>
       <div class="user-action">
-        <% if user_signed_in? %>
           <%= link_to 'Logout', 
             destroy_user_session_path,
             class: 'logout',
             method: :delete
           %>
-        <% end %>
       </div>
+        <% end %>
     </header>
 
     <p class="notice"><%= notice %></p>
