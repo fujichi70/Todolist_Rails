@@ -1,29 +1,47 @@
-<h2>Sign up</h2>
+<div class="video-box">
+  <%= video_tag("/videos/bubbles.mp4", autoplay: :true, loop: :true, muted: :true, class: "video") %>
+</div>
+<div class="text-box">
+	<div class="clear-sheet"></div>
+	<h1 class="title">Todo List</h1>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+	<h1 class="devise-sub-title">Sign Up</h1>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+	<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+		<%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+		<div class="devise-email devise-flex">
+			<%= f.label :email, "e-mail", class: "devise-text" %><br />
+			<%= f.email_field :email, autofocus: true, autocomplete: "email", class: "devise-input--area" %>
+		</div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+		<div class="devise-password">
+			<div class="registration-pass">
+				<div class="devise-password--box devise-flex">
+					<%= f.label :password, "password", class: "devise-text" %>
+					<% if @minimum_password_length %>
+					<% end %>
+					<%= f.password_field :password, autocomplete: "new-password", class: "devise-input--area" %>
+				</div>
+				<div class="registration-notice">※<%= @minimum_password_length %>文字以上</div>
+			</div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+			<div class="registration-pass">
+				<div class="devise-confirm devise-flex">
+					<%= f.label :password_confirmation, "password", class: "devise-text" %><br />
+					<%= f.password_field :password_confirmation, autocomplete: "new-password", class: "devise-input--area" %>
+				</div>
+				<div class="registration-notice">※確認用</div>
+			</div>
+		</div>
 
-<%= render "devise/shared/links" %>
+		<div class="registration-btn">
+			<div class="devise-btn--parts"><%= f.submit "新規登録", class: "btn" %></div>
+		</div>
+	<% end %>
+
+	<div class="newuser-box">
+	<p class="newuser-text"><span>----------</span> 登録済みの方はこちら <span>----------</span></p>
+		<div class="newuser-btn--parts"><%= link_to "ログイン", new_user_session_path, class: "btn" %></div>
+	</div>
+</div><!-- .text-box -->

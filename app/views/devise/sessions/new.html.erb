@@ -1,43 +1,37 @@
-<%# <div class="box">
-  <div class="box-inner"> %>
-  <div class="video-box">
-    <%= video_tag("/videos/bubbles.mp4", autoplay: :true, loop: :true, muted: :true, class: "video") %>
-  </div>
-      <div class="text-box">
-      <div class="clear-sheet"></div>
-        <h1 class="title">Todo List</h1>
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-        <h1 class="login-sub-title">Login</h1>
-        <div class="login-email login-flex">
-          <%= f.label :email, "e-mail", class: "login-text" %><br />
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "login-input--area" %>
-        </div>
-        <div class="login-password">
-          <div class="login-input--text">
-            <div class="login-input--area login-flex">
-              <%= f.label :password, "password", class: "login-text" %>
-                  <%= f.password_field :password, autocomplete: "current-password", class: "login-input--area" %>
-            </div>
-            <div class="login-forget">
-              <%= link_to "パスワードを忘れた場合", new_user_password_path %>
-            </div>
-          </div>
-        </div>
-        <div class="login-btn">
-            <div class="login-remember">
-              <%= f.check_box :remember_me %>
-              <%= f.label :remember, "ログインしたままにする" %>
-            </div>
-          <div class="login-btn--parts"><%= f.submit "ログイン", class: "btn" %></div>
-          <% if devise_mapping.rememberable? %>
-          <% end %>
-        </div>
-      <% end %>
-  
-      <div class="newuser-box">
-        <p class="newuser-text"><span>------------</span> 新しいお客様ですか？ <span>------------</span></p>
-       <div class="newuser-btn--parts"><%= link_to "アカウントを作成", new_user_registration_path, class: "btn" %></div>
-      </div>
-      </div>
-  <%# </div>
-</div> %>
+<div class="video-box">
+  <%= video_tag("/videos/bubbles.mp4", autoplay: :true, loop: :true, muted: :true, class: "video") %>
+</div>
+<div class="text-box">
+		<div class="clear-sheet"></div>
+		<h1 class="title">Todo List</h1>
+		<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+			<h1 class="devise-sub-title">Login</h1>
+			<div class="devise-email devise-flex">
+				<%= f.label :email, "e-mail", class: "devise-text" %><br />
+				<%= f.email_field :email, autofocus: true, autocomplete: "email", class: "devise-input--area" %>
+			</div>
+			<div class="devise-password">
+				<div class="devise-password--box devise-flex">
+					<%= f.label :password, "password", class: "devise-text" %>
+						<%= f.password_field :password, autocomplete: "current-password", class: "devise-input--area" %>
+				</div>
+				<div class="devise-forget">
+					<%= link_to "パスワードを忘れた場合", new_user_password_path %>
+				</div>
+			</div>
+			<div class="devise-btn">
+				<div class="devise-remember">
+					<%= f.check_box :remember_me %>
+					<%= f.label :remember, "ログインしたままにする" %>
+				</div>
+				<div class="devise-btn--parts"><%= f.submit "ログイン", class: "btn" %></div>
+				<% if devise_mapping.rememberable? %>
+				<% end %>
+			</div>
+ 	   <% end %>
+
+    <div class="newuser-box">
+      <p class="newuser-text"><span>------------</span> 新しいお客様ですか？ <span>------------</span></p>
+      <div class="newuser-btn--parts"><%= link_to "アカウントを作成", new_user_registration_path, class: "btn" %></div>
+    </div>
+</div><!-- .text-box -->

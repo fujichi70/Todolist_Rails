@@ -37,53 +37,52 @@
     -moz-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     width: 400px;
-    height: 420px;
+    height: 430px;
     background-color: rgb(255, 255, 255);
     opacity: 0.6;
     z-index: -1;
 }
 
-.login-sub-title {
+.devise-sub-title {
     font-size: 1.5rem;
     margin-bottom: 20px;
     text-align: center;
 }
 
-.login-flex {
+.devise-flex {
     display: flex;
+    align-items: center;
 }
 
-.login-email {
+.devise-email {
     margin-bottom: 10px;
 }
 
-.login-text {
+.devise-text {
     width: 100px;
 }
 
-.login-forget {
+.devise-forget {
     margin: 10px 0 20px;
 }
 
-.login-forget a {
+.devise-forget a {
     border-bottom: 1px solid #000;
     display: inline-block;
 }
-.login-forget a:hover {
+.devise-forget a:hover {
     opacity: 0.7;
 }
 
-.login-btn .btn {
-}
-
-.login-btn--parts {
+.devise-btn--parts {
     margin-bottom: 20px;
     text-align: center;
 }
 
-.login-input-area {
-    padding: 5px 10px;
+.devise-input--area {
+    padding: 5px 15px;
     border-radius: 20px;
+    border: 1px solid #707070;
 }
 
 .newuser-text {
@@ -99,6 +98,15 @@
     color: #707070;
 }
 
-.newuser-btn:hover {
+.newuser-btn--parts .btn:hover {
     background-color: #707070;
+}
+
+/* 新規登録 */
+.registration-pass {
+    margin-bottom: 10px;
+}
+
+.registration-notice {
+    font-size: 0.8em;
 }
