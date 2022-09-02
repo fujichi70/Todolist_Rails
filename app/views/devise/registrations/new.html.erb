@@ -7,8 +7,7 @@
 
 	<h1 class="devise-sub-title">Sign Up</h1>
 
-	<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-		<%= render "devise/shared/error_messages", resource: resource %>
+	<%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: false } ) do |f| %>
 
 		<div class="devise-email devise-flex">
 			<%= f.label :email, "e-mail", class: "devise-text" %><br />
@@ -38,10 +37,11 @@
 		<div class="registration-btn">
 			<div class="devise-btn--parts"><%= f.submit "新規登録", class: "btn" %></div>
 		</div>
-	<% end %>
 
 	<div class="newuser-box">
 	<p class="newuser-text"><span>----------</span> 登録済みの方はこちら <span>----------</span></p>
 		<div class="newuser-btn--parts"><%= link_to "ログイン", new_user_session_path, class: "btn" %></div>
 	</div>
 </div><!-- .text-box -->
+		<%= render "devise/shared/error_messages", resource: resource %>
+	<% end %>
