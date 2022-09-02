@@ -85,20 +85,20 @@
     border: 1px solid #707070;
 }
 
-.newuser-text {
+.submit-text {
 	margin-bottom: 10px;
 }
 
-.newuser-btn--parts {
+.submit-btn--parts {
     text-align: center;
 }
 
-.newuser-btn--parts .btn {
+.submit-btn--parts .btn {
     border: 1px solid #707070;
     color: #707070;
 }
 
-.newuser-btn--parts .btn:hover {
+.submit-btn--parts .btn:hover {
     background-color: #707070;
 }
 
@@ -110,6 +110,28 @@
 .registration-notice {
     font-size: 0.8em;
 }
+
+/* パスワードを忘れた場合 */
+.move-btn--box {
+    margin-top: 20px;
+}
+
+.move-btn--box .btn{
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.forgot-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.forgot-btn {
+    display: inline-block;
+    margin: 20px 0;
+}
+
 
 /* エラー出力 */
 #error_explanation {
