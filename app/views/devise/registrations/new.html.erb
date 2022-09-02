@@ -38,9 +38,9 @@
 			<div class="devise-btn--parts"><%= f.submit "新規登録", class: "btn" %></div>
 		</div>
 
-	<div class="newuser-box">
-	<p class="newuser-text"><span>----------</span> 登録済みの方はこちら <span>----------</span></p>
-		<div class="newuser-btn--parts"><%= link_to "ログイン", new_user_session_path, class: "btn" %></div>
+	<div class="submit-box">
+	<p class="submit-text"><span>----------</span> 登録済みの方はこちら <span>----------</span></p>
+		<div class="submit-btn--parts"><%= link_to "ログイン", new_user_session_path, class: "btn" %></div>
 	</div>
 </div><!-- .text-box -->
 		<%= render "devise/shared/error_messages", resource: resource %>
