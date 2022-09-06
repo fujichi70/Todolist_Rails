@@ -123,17 +123,17 @@ header {
     margin-right: 60px;
 }
 
-ul {
+.header-menu {
     display: flex;
     justify-content: center;
     text-align: center;
 }
 
-li {
+.header-menu--list {
     margin: 0 10px;
 }
 
-nav li a {
+.header-menu--list a {
     color: #fff;
 }
 

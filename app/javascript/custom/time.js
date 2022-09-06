@@ -1,7 +1,7 @@
 "use strict";
 
 if (document.getElementById("dateTime")) {
-    window.location.reload();
+    // window.location.reload();
 
     window.addEventListener("DOMContentLoaded", () => {
         function setFigure(num) {

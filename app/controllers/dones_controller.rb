@@ -11,24 +11,29 @@ class DonesController < ApplicationController
 		
 		if params[:start_btn].present? || params[:end_btn].present?
 			if params[:start_btn].present?
-				time = 
-				session[:done]       = params[:done]
-				session[:date]       = params[:date]
-				session[:start_time] = Time.current.strftime('%H:%M:%S')
-				session[:created_at] = Time.current.strftime('%Y-%m-%d')
+				if params[:date].present?
+					session[:done]       = params[:done]
+					session[:date]       = params[:date]
+					session[:start_time] = Time.current.strftime('%H:%M')
+					session[:created_at] = Time.current.strftime('%Y-%m-%d')
 
-				params[:start_btn] = ''
-				redirect_to '/dones'
+					redirect_to '/dones'
+				else
+					session.clear
+					redirect_to '/dones' , alert: '日付は必ず入力してください'
+				end
 			else
 				if session[:start_time].present?
 					done = Done.new
-					
+
 					if session[:done].present?
 						done.done = session[:done]
-					elsif params[:done].present?
+					elsif !params[:done].empty?
 						done.done = params[:done]
 					else
+						session.clear
 						redirect_to '/dones' , alert: '最初からやり直してください'
+						return false
 					end
 					
 					if session[:date].present?
@@ -36,12 +41,14 @@ class DonesController < ApplicationController
 					elsif params[:date].present?
 						done.date = params[:date]
 					else
+						session.clear
 						redirect_to '/dones' , alert: '最初からやり直してください'
+						return false
 					end
 					
 					done.email      = current_user.email
 					done.start_time = session[:start_time]
-					done.end_time   = Time.current.strftime('%H:%M:%S')
+					done.end_time   = Time.current.strftime('%H:%M')
 					done.created_at = session[:created_at]
 					done.save
 					
@@ -49,9 +56,12 @@ class DonesController < ApplicationController
 					session.clear
 					redirect_to '/dones', notice: 'やったことを追加しました'
 				else
+					session.clear
 					redirect_to '/dones' , alert: '最初からやり直してください'
+					return false
 				end	
 			end
+			
 		elsif params[:add_btn].present?
 			done = Done.new
 		
@@ -88,7 +98,7 @@ class DonesController < ApplicationController
 		id = params[:id]
 		done = Done.find(id)
 		done.destroy
-		redirect_to '/dones', notice: 'やったことを削除しました。'
+		redirect_to '/dones', alert: 'やったことを削除しました。'
 	end
 	
 	def csv
