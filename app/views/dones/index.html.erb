@@ -12,7 +12,7 @@
 						</div>
 						<div class="newtask-box">
 							<input type="text" class="task-input--area task-area" name="done" placeholder="やったこと">
-							<input type="date" id="today" class="task-input--area" name="date">
+							<input type="date" class="today task-input--area" name="date">
 							<input type="text" class="task-input--area" name="description" placeholder="詳細">
 							<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 							<div class="btn-box">
@@ -61,7 +61,7 @@
 			<div class="input-box">
 				<form action="dones" method="post">
 					<input type="text" class="task-input--area task-area" name="done" placeholder="やったこと">
-					<input type="date" id="today" class="task-input--area" name="date">
+					<input type="date" class="today task-input--area" name="date">
 					<input type="time" class="task-input--area" name="start_time">
 					<input type="time" class="task-input--area" name="end_time">
 					<input type="text" class="task-input--area" name="description" placeholder="詳細">

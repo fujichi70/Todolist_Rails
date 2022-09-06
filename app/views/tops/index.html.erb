@@ -40,19 +40,19 @@
 			</table>
 		</div><!-- .task-box -->
 
-		<% @completes.each do |c| %>
-			<% if Date.current.strftime('%Y年%m月%d日') == c.updated_at.strftime('%Y年%m月%d日') %>
-				<div class="complete-box">
-				<h2 class="complete-main--title">完了済み</h2>
-					<table class="complete-table">
-							<tr>
-								<td class="table-title"><span class="check">✓</span><%= c.task %></td>
-								<td class="table-daytime"><%= c.date %><span class="table-time"><%= c.time %></span></td>
-							</tr>
-					</table>
-				</div>
+		<div class="complete-box">
+		<h2 class="complete-main--title">完了済み</h2>
+			<table class="complete-table">
+			<% @completes.each do |c| %>
+				<% if Date.current.strftime('%Y年%m月%d日') == c.updated_at.strftime('%Y年%m月%d日') %>
+					<tr>
+						<td class="table-title"><span class="check">✓</span><%= c.task %></td>
+						<td class="table-daytime"><%= c.date %><span class="table-time"><%= c.time %></span></td>
+					</tr>
+				<% end %>
 			<% end %>
-		<% end %>
+			</table>
+		</div>
 
 	</div><!-- .box-inner -->
 </div><!-- .box -->
