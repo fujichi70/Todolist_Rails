@@ -1,7 +1,9 @@
 "use strict";
 
 if (document.getElementById("dateTime")) {
-    window.addEventListener("DOMContentLoaded", function () {
+    window.location.reload();
+
+    window.addEventListener("DOMContentLoaded", () => {
         function setFigure(num) {
             let ret;
             if (num < 10) {
