@@ -76,9 +76,14 @@ class DonesController < ApplicationController
 			params[:add_btn] = ''
 			redirect_to '/dones', notice: 'やったことを追加しました'
 		else
-			redirect_to '/dones', notice: '最初からやり直してください'
+			redirect_to '/dones', alert: '最初からやり直してください'
 		end
 		
+	end
+
+	def delete
+		session.clear
+		redirect_to '/dones', alert: 'リセットしました'
 	end
 
 	def update
