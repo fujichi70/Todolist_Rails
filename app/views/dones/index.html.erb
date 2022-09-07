@@ -31,6 +31,12 @@
 							<li class="tmp-list"><%= session[:date] %></li>
 							<li class="tmp-list"><%= session[:start_time] %></li>
 						</ul>
+						<form method="post" action="dones">
+							<input type="hidden" name="_method" value="delete">
+							<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+							<input type="submit" class="delete-btn btn" name="delete-btn" value="リセット">
+						</form>
+
 					</div>
 				<% end 	%>
 			</div><!-- .main-group -->
