@@ -79,12 +79,16 @@ class DonesController < ApplicationController
 		end
 		
 	end
-
-	def show
+  
+  def show
 		id    = params[:id]
 		@done = Done.find(id)
 	end
 
+  def delete
+		session.clear
+		redirect_to '/dones', alert: 'リセットしました'
+	
 	def update
 		id   = params[:id]
 		done = Done.find(id)
