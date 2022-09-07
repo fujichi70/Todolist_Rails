@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'dones', to: 'dones#index'
   post 'dones', to: 'dones#store'
   delete 'dones', to: 'dones#delete'
+  get 'dones/:id', to: 'dones#show'
   put 'dones/:id', to: 'dones#update'
   delete 'dones/:id', to: 'dones#destroy'
   get 'dones/csv', to: 'dones#csv'

@@ -2,17 +2,17 @@
 	<div class="box-inner">
 		<h1 class="title">Todo List</h1>
 
-		<div class="newtask-box">
+		<div class="newinput-box">
 			<form action="/" method="post">
-				<input type="text" class="task-input--area task-area" name="task" placeholder="やること">
-				<input type="date" id="today" class="task-input--area" name="date">
-				<input type="time" class="task-input--area" name="time">
+				<input type="text" class="input-area task-area" name="task" placeholder="やること">
+				<input type="date" id="today" class="input-area" name="date">
+				<input type="time" class="input-area" name="time">
 				<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 				<input class="task-btn btn" name="task-btn" type="submit" value="追加">
 			</form>
 		</div>
 
-		<div class="task-box">
+		<div class="input-box">
 			<h2 class="main-title">やること一覧</h2>
 			<table class="main-table">
 					<% @tasks.each do |t| %>
@@ -38,7 +38,7 @@
 						<% end %>
 					<% end %>
 			</table>
-		</div><!-- .task-box -->
+		</div><!-- .input-box -->
 
 		<div class="complete-box">
 		<h2 class="complete-main--title">完了済み</h2>
