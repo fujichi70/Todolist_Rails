@@ -75,6 +75,17 @@ button {
     text-align: center;
 }
 
+/* テーブルレイアウト（共通） */
+.main-table {
+    text-align: start;
+    margin: 0 auto;
+}
+
+.main-title {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
 /* ボタン（共通） */
 .btn {
     border: 1px solid #3579e0;

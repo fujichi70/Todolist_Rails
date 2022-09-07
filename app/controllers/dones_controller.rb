@@ -65,29 +65,34 @@ class DonesController < ApplicationController
 		elsif params[:add_btn].present?
 			done = Done.new
 		
-			done.email       = current_user.email
+			done.email      = current_user.email
 			done.done       = params[:done]
-			done.date      = params[:date]
-			done.start_time      = params[:start_time]
-			done.end_time      = params[:end_time]
+			done.date       = params[:date]
+			done.start_time = params[:start_time]
+			done.end_time   = params[:end_time]
 			done.created_at = Time.current.strftime('%Y-%m-%d')
 			done.save
 			
-			params[:add_btn] = ''
 			redirect_to '/dones', notice: 'やったことを追加しました'
 		else
-			redirect_to '/dones', notice: '最初からやり直してください'
+			redirect_to '/dones', alert: '最初からやり直してください'
 		end
 		
+	end
+
+	def show
+		id    = params[:id]
+		@done = Done.find(id)
 	end
 
 	def update
 		id   = params[:id]
 		done = Done.find(id)
 
-		done.done      = params[:done]
-		done.date      = params[:date]
-		done.time      = params[:time]
+		done.done       = params[:done]
+		done.date       = params[:date]
+		done.start_time = params[:start_time]
+		done.end_time   = params[:end_time]
 		done.updated_at = Time.current.strftime('%Y-%m-%d')
 		done.save
 

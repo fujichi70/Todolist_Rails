@@ -2,7 +2,7 @@
 	<div class="box-inner">
 		<h1 class="title">Done List</h1>
 
-		<form method="post" action="/<%= @done.id %>">
+		<form method="post" action="dones/<%= @done.id %>">
 			<input type="hidden" name="_method" value="put">
 			<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 			<div class="edit-box">
@@ -10,16 +10,22 @@
 
 				<ul>
 					<li>
-					<label for="task">やったこと</label>
-					<input class="task-input--area task-area" value="<%= @done.task %>" id="task" name="task" type="text" required>
+						<label for="done">やったこと</label>
+						<input class="input-area done-area" value="<%= @done.done %>" id="done" name="done" type="text" required>
 					</li>
 					<li>
-					<label>Day</label>
-					<input type="date" name="date" class="task-input--area" value="<%= @done.date %>">
+						<label>Day</label>
+						<input type="date" name="date" class="input-area" value="<%= @done.date %>">
 					</li>
 					<li>
-					<label>Time</label>
-					<input type="time" name="time" class="task-input--area">
+						<label>Start Time</label>
+						<input type="time" name="start_time" class="input-area">
+						<label>End Time</label>
+						<input type="time" name="end_time" class="input-area">
+					<li>
+					<li>
+						<label>Description</label>
+						<input type="text" name="description" class="input-area" placeholder="詳細">
 					</li>
 				</ul>
 				<input type="submit" class="btn" value="更新">

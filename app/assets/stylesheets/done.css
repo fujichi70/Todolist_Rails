@@ -8,12 +8,12 @@
     margin-bottom: 50px;
 }
 
-.input-box .newtask-box .task-input--area {
+.input-box .newinput-box .input-area {
     display: block;
     margin: 10px 0;
 }
 
-.input-box .newtask-box .task-btn {
+.input-box .newinput-box .task-btn {
     font-size: 1.3rem;
     padding: 10px 15px;
 }
@@ -71,9 +71,9 @@
     margin-bottom: 20px;
     background: #fff;
     border-radius: 20px;
-    padding: 10px 20px;
+    padding: 0 20px;
     position: absolute;
-    top: -20px;
+    top: -12px;
     left: 40px;
 }
 
@@ -82,7 +82,7 @@
 }
 
 .tmp-list:first-child {
-    margin-top: 30px;
+    margin-top: 17px;
 }
 
 /* 別途やったことを追加 */
@@ -117,7 +117,6 @@
     margin: 0 10px 10px;
 }
 
-
 @media screen and (max-width: 890px) {
     .done-flex.flex {
         flex-direction: column;
@@ -127,7 +126,6 @@
 }
 
 @media screen and (max-width: 590px) {
-
     .input-box {
         margin-bottom: 50px;
     }
