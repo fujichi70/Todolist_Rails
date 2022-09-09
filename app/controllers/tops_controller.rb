@@ -19,9 +19,9 @@ class TopsController < ApplicationController
 			task.created_at    = Time.current.strftime('%Y-%m-%d')
 			task.save
 
-			redirect_to '/', notice: 'タスクを追加しました'
+			redirect_to '/', notice: 'タスクを追加しました。'
 		else
-			redirect_to '/', alert: 'やることを入れてください'
+			redirect_to '/', alert: 'やることを入れてください。'
 		end
 	end
 
@@ -53,8 +53,10 @@ class TopsController < ApplicationController
 			task.save
 
 			redirect_to '/', notice: 'タスクを更新しました。'
+			return false
 		else
-			redirect_to request.referer, alert: 'やることを入れてください'
+			redirect_to request.referer, alert: 'やることを入れてください。'
+			return false
 		end
 	end
 
