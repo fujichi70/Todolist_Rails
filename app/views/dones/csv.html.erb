@@ -39,7 +39,7 @@
 			</table>
 
 		<div class="csv-btn--box">
-			<%= link_to :back do %>
+			<%= link_to dones_path, data: {turbo: false } do %>
 				<input type="button" class="back-btn btn" value="戻る">
 			<% end %>
 			<%= link_to csv_path(format: :csv, selectdate: params[:selectdate]) do %>
