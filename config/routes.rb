@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'tops#index'
+  root 'tops#index'
 
   devise_for :users
 
@@ -7,15 +7,13 @@ Rails.application.routes.draw do
     get '/users/sign_out' => 'devise/sessions#destroy'
   end
 
-  get 'dones', to: 'dones#index'
-  post 'dones', to: 'dones#store'
+  resources :dones, except: [:new, :edit]
   delete 'dones', to: 'dones#delete'
-  get 'dones/:id', to: 'dones#show'
-  put 'dones/:id', to: 'dones#update'
-  delete 'dones/:id', to: 'dones#destroy'
-  get 'dones/csv', to: 'dones#csv'
+  
+  get 'csv', to: 'dones#csv'
+  get 'csv/date', to: 'dones#csvDate'
 
-  post '/', to: 'tops#store'
+  post '/', to: 'tops#create'
   get '/:id', to: 'tops#show'
   post '/:id', to: 'tops#complete'
   put '/:id', to: 'tops#update'

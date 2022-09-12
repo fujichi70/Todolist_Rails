@@ -7,7 +7,7 @@ class DonesController < ApplicationController
 		@done = Done.where(email: user, date: time )
 	end
 	
-	def store
+	def create
 
 		if params[:start_btn].present? || params[:end_btn].present?
 			if params[:start_btn].present?
@@ -128,14 +128,27 @@ class DonesController < ApplicationController
 	end
 	
 	def csv
-		@user = User.select(:email)
-		@done = Done.where(:email == @user)
+		user = current_user.email
+		if params[:selectdate].present?
+			selectdate = params[:selectdate]
+			@done = Done.where(email: user, date: selectdate)
+			@date = Done.select(:date).distinct.order(date: :asc)
+		else
+			@done = Done.where(email: user)
+			@date = Done.select(:date).distinct.order(date: :asc)
+		end
 		
 		# csv出力
 		respond_to do |format|
 			format.html
 			format.csv do
-				csv_output(@done)
+				if params[:selectdate].present?
+					user = current_user.email
+					@done = Done.where(email: user, date: params[:selectdate])
+					csv_output(@done)
+				else
+					csv_output(@done)
+				end
 			end
 		end
 	end
@@ -144,8 +157,6 @@ class DonesController < ApplicationController
 		# 出力データ生成
 		def csv_output(dones)
 			require 'csv'
-
-			user  = current_user.email
 
 			filename = "done_" + Time.current.strftime("%Y%m%d")
 			bom = "\uFEFF"

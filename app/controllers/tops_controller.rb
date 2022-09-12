@@ -7,7 +7,7 @@ class TopsController < ApplicationController
 		@completes = Task.where(email: user, complete_flag: 1)
 	end
 
-	def store
+	def create
 		task = Task.new
 		
 		if params[:task].present?
