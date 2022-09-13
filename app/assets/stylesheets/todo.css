@@ -1,0 +1,118 @@
+/* タスク入力 */
+.input-area {
+    padding: 10px;
+    margin: 0 5px 10px;
+    border-radius: 10px;
+    border: 1px solid #707070;
+}
+
+.input-box {
+    margin: 30px 0 100px;
+}
+
+.input-box .btn {
+    margin: 0 8px;
+}
+
+/* テーブル */
+.main-table {
+    border-collapse: collapse;
+}
+
+tr {
+    border-bottom: 1px solid #707070;
+}
+
+td {
+    padding: 10px 0;
+}
+
+.table-title {
+    padding-right: 15px;
+}
+
+.table-daytime {
+    padding-right: 40px;
+}
+
+.edit-btn {
+    border: 1px solid #00b126;
+    color: #00b126;
+}
+
+.edit-btn:hover {
+    background-color: #00b126;
+}
+
+.delete-btn {
+    border: 1px solid #d10000;
+    color: #d10000;
+}
+
+.delete-btn:hover {
+    background-color: #d10000;
+}
+
+.table-time {
+    margin-left: 10px;
+}
+
+.complete-table {
+    margin: 0 auto;
+}
+
+.complete-main--title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.1rem;
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.complete-main--title::before,
+.complete-main--title::after {
+    content: "";
+    border-top: 1px solid #707070;
+    display: inline-block;
+    width: 30%;
+}
+
+.check {
+    color: #00b126;
+    margin: 0 10px 0 5px;
+    padding: 0 3px;
+    border-radius: 50%;
+    border: 1px solid #00b126;
+}
+
+.complete-box .table-daytime {
+    padding-right: 0;
+}
+
+/* 編集画面 */
+.edit-box .btn {
+    margin-top: 20px;
+}
+
+@media screen and (max-width: 625px) {
+    .input-area {
+        padding: 5px;
+        margin-bottom: 20px;
+    }
+
+    .task-area {
+        display: block;
+        margin: 0 auto 10px;
+    }
+
+    .task-btn {
+        display: block;
+        margin: 0 auto;
+    }
+
+    .table-time {
+        display: block;
+        margin-left: 0;
+    }
+}

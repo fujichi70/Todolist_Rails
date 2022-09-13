@@ -4,6 +4,15 @@
 
 			<h2 class="main-title">csv出力</h2>
 
+			<form class="selectdate-box" action="csv" method="get" data-turbo=false>
+				<select name="selectdate" onchange="submit(this.form)">
+					<option class="selectday-input" id="selectday" value="none">日付選択</option>
+					<% @date.each do |day| %>
+					<option class="selectday-input" id="selectday" value="<%= day.date %>"><%= day.date %></option>
+					<% end %>
+				</select>
+			</form>
+
 			<table class="main-table">
 				<thead>
 					<tr>
@@ -30,10 +39,10 @@
 			</table>
 
 		<div class="csv-btn--box">
-			<%= link_to :back do %>
+			<%= link_to dones_path, data: {turbo: false } do %>
 				<input type="button" class="back-btn btn" value="戻る">
 			<% end %>
-			<%= link_to dones_csv_path(format: :csv) do %>
+			<%= link_to csv_path(format: :csv, selectdate: params[:selectdate]) do %>
 				<input type="button" class="btn" value="出力する">
 			<% end %>
 		</div>	

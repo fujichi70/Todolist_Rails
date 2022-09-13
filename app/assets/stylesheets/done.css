@@ -4,16 +4,16 @@
     margin-bottom: 20px;
 }
 
-.input-box {
-    margin-bottom: 50px;
+.done-flex .input-box {
+    margin: 0 0 30px;
 }
 
-.input-box .newtask-box .task-input--area {
+.input-box .newinput-box .input-area {
     display: block;
     margin: 10px 0;
 }
 
-.input-box .newtask-box .task-btn {
+.input-box .newinput-box .task-btn {
     font-size: 1.3rem;
     padding: 10px 15px;
 }
@@ -71,18 +71,18 @@
     margin-bottom: 20px;
     background: #fff;
     border-radius: 20px;
-    padding: 10px 20px;
+    padding: 0 20px;
     position: absolute;
-    top: -20px;
-    left: 70px;
+    top: -12px;
+    left: 40px;
 }
 
 .tmp-title {
     font-weight: bold;
 }
 
-.tmp-list {
-    margin-top: 30px;
+.tmp-list:first-child {
+    margin-top: 17px;
 }
 
 /* 別途やったことを追加 */
@@ -114,9 +114,8 @@
 
 .done-box li {
     text-align: left;
-    margin-bottom: 10px;
+    margin: 0 10px 10px;
 }
-
 
 @media screen and (max-width: 890px) {
     .done-flex.flex {
@@ -127,7 +126,6 @@
 }
 
 @media screen and (max-width: 590px) {
-
     .input-box {
         margin-bottom: 50px;
     }

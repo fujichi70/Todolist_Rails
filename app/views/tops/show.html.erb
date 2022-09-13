@@ -11,15 +11,15 @@
 				<ul>
 					<li>
 					<label for="task">やること</label>
-					<input class="task-input--area task-area" value="<%= @task.task %>" id="task" name="task" type="text" required>
+					<input class="input-area task-area" value="<%= @task.task %>" id="task" name="task" type="text">
 					</li>
 					<li>
 					<label>Day</label>
-					<input type="date" name="date" class="task-input--area" value="<%= @task.date %>">
+					<input type="date" name="date" class="input-area" value="<%= @task.date %>">
 					</li>
 					<li>
 					<label>Time</label>
-					<input type="time" name="time" class="task-input--area">
+					<input type="time" name="time" class="input-area" value="<%= @task.time %>">
 					</li>
 				</ul>
 				<input type="submit" class="btn" value="更新">

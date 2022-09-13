@@ -10,10 +10,10 @@
 							<h2 class="time-title">現在の時刻</h2>
 							<div id="dateTime" class="datetime"></div>
 						</div>
-						<div class="newtask-box">
-							<input type="text" class="task-input--area task-area" name="done" placeholder="やったこと">
-							<input type="date" id="today" class="task-input--area" name="date">
-							<input type="text" class="task-input--area" name="description" placeholder="詳細">
+						<div class="newinput-box">
+							<input type="text" class="input-area done-area" name="done" placeholder="やったこと">
+							<input type="date" class="today input-area" name="date">
+							<input type="text" class="input-area" name="description" placeholder="詳細">
 							<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 							<div class="btn-box">
 								<input type="submit" id="startBtn" class="task-btn btn" name="start_btn" value="開始">
@@ -31,6 +31,12 @@
 							<li class="tmp-list"><%= session[:date] %></li>
 							<li class="tmp-list"><%= session[:start_time] %></li>
 						</ul>
+						<form method="post" action="dones">
+							<input type="hidden" name="_method" value="delete">
+							<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+							<input type="submit" class="delete-btn btn" name="delete-btn" value="リセット">
+						</form>
+
 					</div>
 				<% end 	%>
 			</div><!-- .main-group -->
@@ -42,7 +48,7 @@
 						<ul>
 							<li class="done-title"><%= d.done %></li>
 							<li class="done-daytime"><%= d.start_time %> ～ <%= d.end_time %></li>
-							<li><a href="/<%= d.id %>" class="edit-btn btn">編集</a></li>
+							<li><a href="dones/<%= d.id %>" class="edit-btn btn" data-turbo=false>編集</a></li>
 							<li>
 								<form method="post" action="dones/<%= d.id %>">
 									<input type="hidden" name="_method" value="delete">
@@ -60,18 +66,18 @@
 			<p class="add-title">別にやったことを入力</p>
 			<div class="input-box">
 				<form action="dones" method="post">
-					<input type="text" class="task-input--area task-area" name="done" placeholder="やったこと">
-					<input type="date" id="today" class="task-input--area" name="date">
-					<input type="time" class="task-input--area" name="start_time">
-					<input type="time" class="task-input--area" name="end_time">
-					<input type="text" class="task-input--area" name="description" placeholder="詳細">
+					<input type="text" class="input-area done-area" name="done" placeholder="やったこと">
+					<input type="date" class="today input-area" name="date">
+					<input type="time" class="input-area" name="start_time">
+					<input type="time" class="input-area" name="end_time">
+					<input type="text" class="input-area" name="description" placeholder="詳細">
 					<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 					<input type="submit" class="add-btn btn" name="add_btn" value="追加">
 				</form>
 			</div>
 		</div>
 
-		<%= link_to dones_csv_path do %>
+		<%= link_to csv_path do %>
 			<input type="button" class="btn" value="csv出力">
 		<% end %>
 

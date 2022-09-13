@@ -75,6 +75,17 @@ button {
     text-align: center;
 }
 
+/* テーブルレイアウト（共通） */
+.main-table {
+    text-align: start;
+    margin: 0 auto;
+}
+
+.main-title {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
 /* ボタン（共通） */
 .btn {
     border: 1px solid #3579e0;
@@ -123,17 +134,17 @@ header {
     margin-right: 60px;
 }
 
-ul {
+.header-menu {
     display: flex;
     justify-content: center;
     text-align: center;
 }
 
-li {
+.header-menu--list {
     margin: 0 10px;
 }
 
-nav li a {
+.header-menu--list a {
     color: #fff;
 }
 
@@ -148,11 +159,28 @@ nav li a {
     color: #00b126;
     padding: 10px 0;
     text-align: center;
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 10px;
+    padding: 5px 15px;
+    background-color: #fff;
+    border: 1px solid #00b126;
 }
 
 .alert {
+    color: #d10000;
     padding: 10px 0;
     text-align: center;
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 10px;
+    padding: 5px 15px;
+    background-color: #fff;
+    border: 1px solid #d10000;
 }
 
 @media screen and (max-width: 590px) {
