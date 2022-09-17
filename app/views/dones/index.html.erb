@@ -5,56 +5,56 @@
 		<div class="done-flex flex">
 			<div class="main-group">
 				<div class="input-box">
-					<form action="dones" method="post">
+					<%= form_with url: dones_start_path do |f| %>
 						<div class="time-box">
 							<h2 class="time-title">現在の時刻</h2>
 							<div id="dateTime" class="datetime"></div>
 						</div>
 						<div class="newinput-box">
-							<input type="text" class="input-area done-area" name="done" placeholder="やったこと">
-							<input type="date" class="today input-area" name="date">
-							<input type="text" class="input-area" name="description" placeholder="詳細">
-							<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+							<%= f.text_field :done, class: "input-area done-area", placeholder: "やったこと" %>
+							<%= f.date_field :date, class: "today input-area" %>
+							<%= f.text_field :description, class: "input-area", placeholder: "詳細" %>
+							<% if !@newDone.present? %>
+								<%= f.hidden_field :done_id, value: SecureRandom.hex(6) %>
+							<% else %>
+								<% @newDone.each do |id| %>
+									<%= f.hidden_field :keep_id, value: id.done_id %>
+								<% end %>
+							<% end %>
 							<div class="btn-box">
-								<input type="submit" id="startBtn" class="task-btn btn" name="start_btn" value="開始">
-								<input type="submit" id="endBtn" class="task-btn end-btn btn" name="end_btn" value="終了">
+  							<%= f.submit "開始", name: "start-btn", id: "startBtn", class: "task-btn btn is-active" %>
+  							<%= f.submit "終了", name: "end-btn", id: "endBtn", class: "task-btn end-btn btn", formaction: dones_end_path %>
 							</div>
 						</div>
-					</form>
+					<% end %>
 				</div>
-	
-				<% if session[:start_time].present? %>
+
+					<% @newDone.each do |n| %>
 					<div class="tmp-box">
 						<h2 class="tmp-main--title">取り掛かり中</h2>
 						<ul>
-							<li class="tmp-list tmp-title"><%= session[:done] %></li>
-							<li class="tmp-list"><%= session[:date] %></li>
-							<li class="tmp-list"><%= session[:start_time] %></li>
+							<li class="tmp-list tmp-title"><%= n.done %></li>
+							<li class="tmp-list tmp-title"><%= n.date %></li>
+							<li class="tmp-list"><%= n.start_time %></li>
 						</ul>
-						<form method="post" action="dones">
-							<input type="hidden" name="_method" value="delete">
-							<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-							<input type="submit" class="delete-btn btn" name="delete-btn" value="リセット">
-						</form>
-
+						<%= form_with url: dones_path, method: :delete do |f| %>
+							<%= f.hidden_field :done_id, value: "#{n.done_id}" %>
+							<%= f.submit "リセット", class: "delete-btn btn", name: "delete-btn" %>
+						<% end %>
 					</div>
-				<% end 	%>
+					<% end %>
 			</div><!-- .main-group -->
 
 			<div class="done-box">
 				<h2 class="main-title done-main--title"><span class="done-day"><%= Time.current.strftime("%Y年%m月%d日") %></span>やったこと一覧</h2>
 				<% @done.each do |d| %>
-					<% if d.email == current_user.email %>
+					<% if d.start_time.present? && d.end_time.present? %>
 						<ul>
 							<li class="done-title"><%= d.done %></li>
 							<li class="done-daytime"><%= d.start_time %> ～ <%= d.end_time %></li>
 							<li><a href="dones/<%= d.id %>" class="edit-btn btn" data-turbo=false>編集</a></li>
 							<li>
-								<form method="post" action="dones/<%= d.id %>">
-									<input type="hidden" name="_method" value="delete">
-									<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-									<input type="submit" class="delete-btn btn" name="delete-btn" value="削除">
-								</form>
+								<%= button_to "削除", "dones/#{d.id}", class: "delete-btn btn", method: :delete %>
 							</li>
 						</ul>
 					<% end %>
@@ -65,15 +65,14 @@
 		<div class="add-box">
 			<p class="add-title">別にやったことを入力</p>
 			<div class="input-box">
-				<form action="dones" method="post">
-					<input type="text" class="input-area done-area" name="done" placeholder="やったこと">
-					<input type="date" class="today input-area" name="date">
-					<input type="time" class="input-area" name="start_time">
-					<input type="time" class="input-area" name="end_time">
-					<input type="text" class="input-area" name="description" placeholder="詳細">
-					<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-					<input type="submit" class="add-btn btn" name="add_btn" value="追加">
-				</form>
+				<%= form_with url: dones_path do |f| %>
+					<%= f.text_field :"done", class: "input-area done-area", placeholder: "やったこと" %>
+					<%= f.date_field :"date", class: "today input-area" %>
+					<%= f.time_field :start_time, class: "input-area" %>
+					<%= f.time_field :"end_time", class: "input-area" %>
+					<%= f.text_field :description, class: "input-area", placeholder: "詳細" %>
+					<%= f.submit "追加", class: "add-btn btn", name: "add_btn" %>
+				<% end %>
 			</div>
 		</div>
 

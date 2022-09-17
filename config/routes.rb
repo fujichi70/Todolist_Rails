@@ -7,7 +7,10 @@ Rails.application.routes.draw do
     get '/users/sign_out' => 'devise/sessions#destroy'
   end
 
-  resources :dones, except: [:new, :edit]
+  resources :dones, except: [:create, :new, :edit]
+  post 'dones/start', to: 'dones#start'
+  post 'dones/end', to: 'dones#end'
+  post 'dones/add', to: 'dones#add'
   delete 'dones', to: 'dones#delete'
   
   get 'csv', to: 'dones#csv'
