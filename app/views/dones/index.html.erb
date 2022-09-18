@@ -39,7 +39,7 @@
 						</ul>
 						<%= form_with url: dones_path, method: :delete do |f| %>
 							<%= f.hidden_field :done_id, value: "#{n.done_id}" %>
-							<%= f.submit "リセット", class: "delete-btn btn", name: "delete-btn" %>
+							<%= f.submit "リセット", class: "delete-btn btn", name: "delete-btn", data: { turbo: false } %>
 						<% end %>
 					</div>
 					<% end %>
@@ -48,16 +48,14 @@
 			<div class="done-box">
 				<h2 class="main-title done-main--title"><span class="done-day"><%= Time.current.strftime("%Y年%m月%d日") %></span>やったこと一覧</h2>
 				<% @done.each do |d| %>
-					<% if d.start_time.present? && d.end_time.present? %>
-						<ul>
-							<li class="done-title"><%= d.done %></li>
-							<li class="done-daytime"><%= d.start_time %> ～ <%= d.end_time %></li>
-							<li><a href="dones/<%= d.id %>" class="edit-btn btn" data-turbo=false>編集</a></li>
-							<li>
-								<%= button_to "削除", "dones/#{d.id}", class: "delete-btn btn", method: :delete %>
-							</li>
-						</ul>
-					<% end %>
+					<ul>
+						<li class="done-title"><%= d.done %></li>
+						<li class="done-daytime"><%= d.start_time %> ～ <%= d.end_time %></li>
+						<li><a href="dones/<%= d.id %>" class="edit-btn btn" data-turbo=false>編集</a></li>
+						<li>
+							<%= button_to "削除", "dones/#{d.id}", class: "delete-btn btn", method: :delete %>
+						</li>
+					</ul>
 				<% end %>
 			</div><!-- .done-box -->
 		</div><!-- .done-flex -->
@@ -65,12 +63,13 @@
 		<div class="add-box">
 			<p class="add-title">別にやったことを入力</p>
 			<div class="input-box">
-				<%= form_with url: dones_path do |f| %>
-					<%= f.text_field :"done", class: "input-area done-area", placeholder: "やったこと" %>
-					<%= f.date_field :"date", class: "today input-area" %>
+				<%= form_with url: dones_add_path do |f| %>
+					<%= f.text_field :done, class: "input-area done-area", placeholder: "やったこと" %>
+					<%= f.date_field :date, class: "today input-area" %>
 					<%= f.time_field :start_time, class: "input-area" %>
-					<%= f.time_field :"end_time", class: "input-area" %>
+					<%= f.time_field :end_time, class: "input-area" %>
 					<%= f.text_field :description, class: "input-area", placeholder: "詳細" %>
+					<%= f.hidden_field :done_id, value: SecureRandom.hex(6) %>
 					<%= f.submit "追加", class: "add-btn btn", name: "add_btn" %>
 				<% end %>
 			</div>

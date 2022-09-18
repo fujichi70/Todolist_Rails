@@ -4,7 +4,7 @@ class DonesController < ApplicationController
 	def index(done_id: nil)
 		user = current_user.email
 		time = Time.current.strftime("%Y-%m-%d")
-		@done = Done.where(email: user, date: time )
+		@done = Done.where(email: user, date: time).and(Done.where.not(end_time: nil ))
 		@newDone = Done.where(done_id: done_id)
 	end
 	
@@ -41,7 +41,8 @@ class DonesController < ApplicationController
 		
 		newDone.each do |n|
 			if !n.done.present? && !done.present?
-				return redirect_to '/dones' , alert: 'やったことが未入力です。'
+				done_id = keep_id
+				return redirect_to dones_url(done_id: done_id), alert: 'やったことが未入力です。'
 			end
 	
 			if !n.done.present?
@@ -59,21 +60,26 @@ class DonesController < ApplicationController
 		end
   end
     
-  def add
+  def add(done_id:, done: nil, date: nil, start_time: nil, end_time: nil, description: nil)
     if !done.present? || !date.present?
       return redirect_to '/dones' , alert: '最初からやり直してください。'
     end
 
-    done = Done.new
+		if start_time > end_time
+			return redirect_to '/dones', alert: '開始時刻と終了時刻が前後しています。'
+		end
+
+    newDone = Done.new
     
-    done.done_id     = done_id
-    done.done        = done
-    done.date        = date
-    done.start_time  = start_time
-    done.end_time    = end_time
-    done.description = description
-    done.created_at  = Time.current.strftime('%Y-%m-%d')
-    done.save
+		newDone.email       = current_user.email
+    newDone.done_id     = done_id
+    newDone.done        = done
+    newDone.date        = date
+    newDone.start_time  = start_time
+    newDone.end_time    = end_time
+    newDone.description = description
+    newDone.created_at  = Time.current.strftime('%Y-%m-%d')
+    newDone.save
     
     return redirect_to '/dones', notice: 'やったことを追加しました'
   end
@@ -89,19 +95,19 @@ class DonesController < ApplicationController
 	end
 	
 	def update(id:, done:, date:, start_time:, end_time:, description: nil)
-		done = Done.find(id)
+		updateDone = Done.find(id)
 
 		if !done.present? && !date.present? && !start_time.present? && !end_time.present?
 			return redirect_to request.referer, alert: 'やったことと日付と時間は必ず入力してください。'
-    	end
+    end
 
-		done.done        = done
-		done.date        = date
-		done.start_time  = start_time
-		done.end_time    = end_time
-		done.description = description
-		done.updated_at  = Time.current.strftime('%Y-%m-%d')
-		done.save
+		updateDone.done        = done
+		updateDone.date        = date
+		updateDone.start_time  = start_time
+		updateDone.end_time    = end_time
+		updateDone.description = description
+		updateDone.updated_at  = Time.current.strftime('%Y-%m-%d')
+		updateDone.save
 
 		return redirect_to '/dones', notice: '編集しました。'
 	end
@@ -142,7 +148,7 @@ class DonesController < ApplicationController
 		def csv_output(dones)
 			require 'csv'
 
-			filename = "done_" + Time.current.strftime("%Y%m%d")
+			filename = "done_load" + Time.current.strftime("%Y%m%d")
 			bom = "\uFEFF"
 
 			csv1 = CSV.generate(bom) do |csv|
