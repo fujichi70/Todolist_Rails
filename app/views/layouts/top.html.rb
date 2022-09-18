@@ -16,6 +16,5 @@
         <%= yield %>
       </div>
     </main>
-    # <%= render "layouts/footer" %>
   </body>
 </html>

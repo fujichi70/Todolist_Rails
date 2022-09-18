@@ -1,136 +1,126 @@
 class DonesController < ApplicationController
 	before_action :move_to_signed_in
 	
-	def index
+	def index(done_id: nil)
 		user = current_user.email
 		time = Time.current.strftime("%Y-%m-%d")
-		@done = Done.where(email: user, date: time )
+		@done = Done.where(email: user, date: time).and(Done.where.not(end_time: nil ))
+		@newDone = Done.where(done_id: done_id)
 	end
 	
-	def create
+  def start(done_id:, keep_id: nil, date:, done: nil, description: nil)
+		if !date.present?
+			return redirect_to '/dones', alert: '日付は必ず入力してください。'
+    end
 
-		if params[:start_btn].present? || params[:end_btn].present?
-			if params[:start_btn].present?
-				if params[:date].present?
-					session[:done]        = params[:done]
-					session[:date]        = params[:date]
-					session[:start_time]  = Time.current.strftime('%H:%M')
-					session[:description] = params[:description]
-					session[:created_at]  = Time.current.strftime('%Y-%m-%d')
-					
-					redirect_to '/dones'
-				else
-					session.clear
-					redirect_to '/dones' , alert: '日付は必ず入力してください。'
-				end
-			else
-				if session[:start_time].present?
-					done = Done.new
-					
-					if session[:done].present?
-						done.done = session[:done]
-					elsif !params[:done].empty?
-						done.done = params[:done]
-					else
-						session.clear
-						redirect_to '/dones' , alert: '最初からやり直してください。'
-						return false
-					end
-					
-					if session[:date].present?
-						done.date = session[:date]
-					elsif params[:date].present?
-						done.date = params[:date]
-					else
-						session.clear
-						redirect_to '/dones' , alert: '最初からやり直してください。'
-						return false
-					end
-					
-					if session[:description].present?
-						done.description = session[:description]
-					else params[:description].present?
-						done.description = params[:description]
-					end
-					
-					done.email      = current_user.email
-					done.start_time = session[:start_time]
-					done.description = session[:description]
-					done.end_time   = Time.current.strftime('%H:%M')
-					done.created_at = session[:created_at]
-					done.save
-					
-					params[:end_btn] = ''
-					session.clear
-					redirect_to '/dones', notice: 'やったことを追加しました。'
-					return false
-				else
-					session.clear
-					redirect_to '/dones' , alert: '最初からやり直してください。'
-					return false
-				end	
+		if keep_id.present?
+			keepDone = Done.where(done_id: keep_id)
+			keepDone.destroy_all
+		end
+
+		@newDone = Done.new
+
+		@newDone.email       = current_user.email
+		@newDone.done_id     = done_id
+		@newDone.done        = done
+		@newDone.date        = date
+		@newDone.start_time  = Time.current.strftime('%H:%M')
+		@newDone.description = description
+		@newDone.created_at  = Time.current.strftime('%Y-%m-%d')
+		@newDone.save
+
+		return redirect_to dones_url(done_id: done_id)
+ 	end
+
+  def end(keep_id: nil, done_id: nil, done: nil, description: nil)
+		if !keep_id.present?
+			return redirect_to '/dones' , alert: '最初からやり直してください。'
+		end
+	
+		newDone = Done.where(done_id: keep_id)
+		
+		newDone.each do |n|
+			if !n.done.present? && !done.present?
+				done_id = keep_id
+				return redirect_to dones_url(done_id: done_id), alert: 'やったことが未入力です。'
+			end
+	
+			if !n.done.present?
+				n.done = done
+			end	
+			
+			if !n.description.present?
+				n.description = description
 			end
 			
-		elsif params[:add_btn].present?
-			done = Done.new
-		
-			done.email      = current_user.email
-			done.done       = params[:done]
-			done.date       = params[:date]
-			done.start_time = params[:start_time]
-			done.end_time   = params[:end_time]
-			done.description   = params[:description]
-			done.created_at = Time.current.strftime('%Y-%m-%d')
-			done.save
-			
-			redirect_to '/dones', notice: 'やったことを追加しました'
-		else
-			redirect_to '/dones', alert: '最初からやり直してください'
+			n.end_time   = Time.current.strftime('%H:%M')
+			n.created_at  = Time.current.strftime('%Y-%m-%d')
+			n.save
+			return redirect_to '/dones', notice: 'やったことを追加しました。'
 		end
+  end
+    
+  def add(done_id:, done: nil, date: nil, start_time: nil, end_time: nil, description: nil)
+    if !done.present? || !date.present?
+      return redirect_to '/dones' , alert: '最初からやり直してください。'
+    end
+
+		if start_time > end_time
+			return redirect_to '/dones', alert: '開始時刻と終了時刻が前後しています。'
+		end
+
+    newDone = Done.new
+    
+		newDone.email       = current_user.email
+    newDone.done_id     = done_id
+    newDone.done        = done
+    newDone.date        = date
+    newDone.start_time  = start_time
+    newDone.end_time    = end_time
+    newDone.description = description
+    newDone.created_at  = Time.current.strftime('%Y-%m-%d')
+    newDone.save
+    
+    return redirect_to '/dones', notice: 'やったことを追加しました'
+  end
 		
-	end
-  
-	def show
-		id    = params[:id]
+	def show(id:)
 		@done = Done.find(id)
 	end
 
 	def delete
-		session.clear
-		redirect_to '/dones', alert: 'リセットしました。'
+		done = Done.where(end_time: nil)
+		done.destroy_all
+		return redirect_to '/dones', alert: 'リセットしました。'
 	end
 	
-	def update
-		id   = params[:id]
-		done = Done.find(id)
+	def update(id:, done:, date:, start_time:, end_time:, description: nil)
+		updateDone = Done.find(id)
 
-		if params[:done].present? && params[:date].present? && params[:start_time].present? && params[:end_time].present?
-			done.done       = params[:done]
-			done.date       = params[:date]
-			done.start_time = params[:start_time]
-			done.end_time   = params[:end_time]
-			done.description   = params[:description]
-			done.updated_at = Time.current.strftime('%Y-%m-%d')
-			done.save
-			redirect_to '/dones', notice: '編集しました。'
-			return false
-		else
-			redirect_to request.referer, alert: 'やったことと日付と時間は必ず入力してください。'
-		end
+		if !done.present? && !date.present? && !start_time.present? && !end_time.present?
+			return redirect_to request.referer, alert: 'やったことと日付と時間は必ず入力してください。'
+    end
 
+		updateDone.done        = done
+		updateDone.date        = date
+		updateDone.start_time  = start_time
+		updateDone.end_time    = end_time
+		updateDone.description = description
+		updateDone.updated_at  = Time.current.strftime('%Y-%m-%d')
+		updateDone.save
+
+		return redirect_to '/dones', notice: '編集しました。'
 	end
 	
-	def destroy
-		id = params[:id]
+	def destroy(id:)
 		done = Done.find(id)
 		done.destroy
-		redirect_to '/dones', alert: 'やったことを削除しました。'
+		return redirect_to '/dones', alert: 'やったことを削除しました。'
 	end
 	
-	def csv
+	def csv(selectdate: nil)
 		user = current_user.email
-		if params[:selectdate].present?
-			selectdate = params[:selectdate]
+		if selectdate.present?
 			@done = Done.where(email: user, date: selectdate)
 			@date = Done.select(:date).distinct.order(date: :asc)
 		else
@@ -142,9 +132,9 @@ class DonesController < ApplicationController
 		respond_to do |format|
 			format.html
 			format.csv do
-				if params[:selectdate].present?
+				if selectdate.present?
 					user = current_user.email
-					@done = Done.where(email: user, date: params[:selectdate])
+					@done = Done.where(email: user, date: selectdate)
 					csv_output(@done)
 				else
 					csv_output(@done)
@@ -158,7 +148,7 @@ class DonesController < ApplicationController
 		def csv_output(dones)
 			require 'csv'
 
-			filename = "done_" + Time.current.strftime("%Y%m%d")
+			filename = "done_load" + Time.current.strftime("%Y%m%d")
 			bom = "\uFEFF"
 
 			csv1 = CSV.generate(bom) do |csv|
@@ -191,7 +181,7 @@ class DonesController < ApplicationController
 		# ログインしてない場合ログインページに遷移
 		def move_to_signed_in
 			unless user_signed_in?
-			redirect_to  '/users/sign_in'
+			return redirect_to  '/users/sign_in'
 		end
 	end
 
