@@ -3,13 +3,12 @@
 		<h1 class="title">Todo List</h1>
 
 		<div class="newinput-box">
-			<form action="/" method="post">
-				<input type="text" class="input-area task-area" name="task" placeholder="やること">
-				<input type="date" id="today" class="input-area" name="date">
-				<input type="time" class="input-area" name="time">
-				<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-				<input class="task-btn btn" name="task-btn" type="submit" value="追加">
-			</form>
+			<%= form_with model: @task do |f| %>
+				<%= f.text_field :task, class: "input-area task-area", placeholder: "やること" %>
+				<%= f.date_field :date, class: "today input-area" %>
+				<%= f.time_field :time, class: "input-area" %>
+        <%= f.submit "追加", name: "task-btn", class: "task-btn btn" %>
+			<% end %>
 		</div>
 
 		<div class="input-box">
@@ -21,18 +20,11 @@
 							<td class="table-title"><%= t.task %></td>
 							<td class="table-daytime"><%= t.date %><span class="table-time"><%= t.time %></span></td>
 							<td>
-								<form action="/<%= t.id %>" method="post">
-									<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-									<input type="submit" name="complete-btn" class="complete-btn btn" value="完了">
-								</form>
+								<%= button_to "完了", "/#{t.id}", class: "complete-btn btn", method: :post %>
 							</td>
 							<td><a href="/<%= t.id %>" class="edit-btn btn">編集</a></td>
 							<td>
-								<form method="post" action="/<%= t.id %>">
-									<input type="hidden" name="_method" value="delete">
-									<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-									<input type="submit" class="delete-btn btn" name="delete-btn" value="削除">
-								</form>
+								<%= button_to "削除", "/#{t.id}", class: "delete-btn btn", method: :delete %>
 							</td>
 						</tr>
 						<% end %>
