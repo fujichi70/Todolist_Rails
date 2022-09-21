@@ -17,3 +17,7 @@ select {
     padding: 10px;
     border-radius: 20px;
 }
+
+.watch-btn--box {
+    margin-top: 20px;
+}

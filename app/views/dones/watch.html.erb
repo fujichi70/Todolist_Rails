@@ -1,0 +1,47 @@
+<div class="box">
+	<div class="box-inner">
+		<h1 class="title">Done List</h1>
+
+			<h2 class="main-title">過去のやったこと検索</h2>
+
+			<form class="selectdate-box" action="watch" method="get" data-turbo=false>
+				<select name="selectdate" onchange="submit(this.form)">
+					<option class="selectday-input" id="selectday" value="none">日付選択</option>
+					<% @date.each do |day| %>
+					<option class="selectday-input" id="selectday" value="<%= day.date %>"><%= day.date %></option>
+					<% end %>
+				</select>
+			</form>
+
+			<table class="main-table">
+				<thead>
+					<tr>
+						<th class="csv-title">日付</th>
+						<th class="csv-title">開始時間</th>
+						<th class="csv-title">終了時間</th>
+						<th class="csv-title">業務名</th>
+						<th class="csv-title">内容</th>
+					</tr>
+				</thead>
+				<tbody>
+				<% @done.each do |d| %>
+					<% if d.email == current_user.email %>
+							<tr>
+								<td class="table-daytime"><%= d.date %></td>
+								<td class="table-daytime"><%= d.start_time %></td>
+								<td class="table-daytime"><%= d.end_time %></td>
+								<td class="table-title"><%= d.done %></td>
+								<td class="table-daytime"><%= d.description %></td>
+							</tr>
+					<% end %>
+				<% end %>
+				</tbody>
+			</table>
+
+			<div class="watch-btn--box">
+				<%= link_to dones_path, data: {turbo: false } do %>
+					<input type="button" class="back-btn btn" value="戻る">
+				<% end %>
+			</div>
+	</div><!-- .box-inner -->
+</div><!-- .box -->
