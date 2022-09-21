@@ -63,12 +63,6 @@
 			</div><!-- .done-box -->
 		</div><!-- .done-flex -->
 
-		<div class="watch-box">
-			<%= link_to dones_watch_path do %>
-			<input type="button" class="btn" value="過去のやったことを確認">
-		<% end %>
-		</div>
-
 		<div class="add-box">
 			<p class="add-title">別にやったことを入力</p>
 			<div class="input-box">
@@ -84,9 +78,16 @@
 			</div>
 		</div>
 
-		<%= link_to csv_path do %>
-			<input type="button" class="btn" value="csv出力">
-		<% end %>
-
+		<div class="other-box">
+			<p class="other-title">他メニュー</p>
+			<div class="btn-box">
+			<%= link_to done_watch_path do %>
+				<input type="button" class="watch-btn btn" value="過去のやったことを確認">
+			<% end %>
+				<%= link_to csv_path do %>
+					<input type="button" class="btn" value="csv出力">
+				<% end %>
+			</div>
+		</div>
 	</div><!-- .box-inner -->
 </div><!-- .box -->

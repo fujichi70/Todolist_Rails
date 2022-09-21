@@ -81,6 +81,17 @@ class DonesController < ApplicationController
     return redirect_to '/dones', notice: 'やったことを追加しました'
   end
 
+  def watch(selectdate: nil)
+    user = current_user.email
+    if selectdate.present?
+      @done = Done.where(email: user, date: selectdate)
+      @date = Done.select(:date).distinct.order(date: :asc)
+    else
+      @done = Done.where(email: user)
+      @date = Done.select(:date).distinct.order(date: :asc)
+    end
+  end
+
   def show(id:)
     @done = Done.find(id)
   end

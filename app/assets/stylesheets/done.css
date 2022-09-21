@@ -43,11 +43,6 @@
     margin: 10px 0;
 }
 
-.btn-box {
-    display: flex;
-    justify-content: space-around;
-}
-
 .end-btn {
     border: 1px solid #d10000;
     color: #d10000;
@@ -96,6 +91,10 @@
 }
 
 /* 別途やったことを追加 */
+.add-box .input-box {
+    margin: 15px 0 40px;
+}
+
 .add-title {
     margin-bottom: 10px;
 }
@@ -125,6 +124,29 @@
 .done-box li {
     text-align: left;
     margin: 0 10px 10px;
+}
+
+/* 他メニュー */
+.btn-box {
+    display: flex;
+    justify-content: center;
+}
+
+.other-title {
+  margin-bottom: 15px;
+}
+
+.btn-box .btn{
+    border: 1px solid #00b126;
+    color: #00b126;
+    margin: 0 10px;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+.btn-box .btn:hover {
+    color: #fff;
+    background-color: #00b126;
 }
 
 @media screen and (max-width: 890px) {
