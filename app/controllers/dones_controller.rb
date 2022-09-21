@@ -5,16 +5,13 @@ class DonesController < ApplicationController
     user = current_user.email
     time = Time.current.strftime("%Y-%m-%d")
     @done = Done.where(email: user, date: time).and(Done.where.not(end_time: nil))
-    @newDone = Done.where(done_id: done_id)
+    @newDone = Done.where(end_time: nil)
   end
 
-  def start(done_id:, keep_id: nil, date:, done: nil, description: nil)
-    if !date.present?
-     return redirect_to '/dones', alert: '日付は必ず入力してください。'
-    end
-
+  def start(done_id:, keep_id: nil, done: nil, description: nil)
     if keep_id.present?
-      keepDone = Done.where(done_id: keep_id)
+      done_id = keep_id
+      keepDone = Done.where(done_id: done_id)
       keepDone.destroy_all
     end
 
@@ -23,13 +20,13 @@ class DonesController < ApplicationController
     @newDone.email       = current_user.email
     @newDone.done_id     = done_id
     @newDone.done        = done
-    @newDone.date        = date
+    @newDone.date        = Time.current.strftime('%Y-%m-%d')
     @newDone.start_time  = Time.current.strftime('%H:%M')
     @newDone.description = description
     @newDone.created_at  = Time.current.strftime('%Y-%m-%d')
     @newDone.save
 
-    return redirect_to dones_url(done_id: done_id)
+    return redirect_to '/dones', notice: '取り掛かりました。'
   end
 
   def end(keep_id: nil, done_id: nil, done: nil, description: nil)

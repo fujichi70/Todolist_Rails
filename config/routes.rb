@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   post 'dones/start', to: 'dones#start'
   post 'dones/end', to: 'dones#end'
   post 'dones/add', to: 'dones#add'
+  post 'dones/watch', to: 'dones#watch'
   delete 'dones', to: 'dones#delete'
   
   get 'csv', to: 'dones#csv'
