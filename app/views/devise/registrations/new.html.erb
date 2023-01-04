@@ -1,0 +1,47 @@
+<div class="video-box">
+  <%= video_tag("/videos/bubbles.mp4", autoplay: :true, loop: :true, muted: :true, class: "video") %>
+</div>
+<div class="text-box">
+	<div class="clear-sheet"></div>
+	<h1 class="title">Todo List</h1>
+
+	<h1 class="devise-sub-title">Sign Up</h1>
+
+	<%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: false } ) do |f| %>
+
+		<div class="devise-email devise-flex">
+			<%= f.label :email, "e-mail", class: "devise-text" %><br />
+			<%= f.email_field :email, autofocus: true, autocomplete: "email", class: "devise-input--area" %>
+		</div>
+
+		<div class="devise-password">
+			<div class="registration-pass">
+				<div class="devise-password--box devise-flex">
+					<%= f.label :password, "password", class: "devise-text" %>
+					<% if @minimum_password_length %>
+					<% end %>
+					<%= f.password_field :password, autocomplete: "new-password", class: "devise-input--area" %>
+				</div>
+				<div class="registration-notice">※<%= @minimum_password_length %>文字以上</div>
+			</div>
+
+			<div class="registration-pass">
+				<div class="devise-confirm devise-flex">
+					<%= f.label :password_confirmation, "password", class: "devise-text" %><br />
+					<%= f.password_field :password_confirmation, autocomplete: "new-password", class: "devise-input--area" %>
+				</div>
+				<div class="registration-notice">※確認用</div>
+			</div>
+		</div>
+
+		<div class="registration-btn">
+			<div class="devise-btn--parts"><%= f.submit "新規登録", class: "btn" %></div>
+		</div>
+
+	<div class="submit-box">
+	<p class="submit-text"><span>----------</span> 登録済みの方はこちら <span>----------</span></p>
+		<div class="submit-btn--parts"><%= link_to "ログイン", new_user_session_path, class: "btn" %></div>
+	</div>
+</div><!-- .text-box -->
+		<%= render "devise/shared/error_messages", resource: resource %>
+	<% end %>

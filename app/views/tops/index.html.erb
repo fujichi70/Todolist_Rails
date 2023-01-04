@@ -1,0 +1,50 @@
+<div class="box">
+	<div class="box-inner">
+		<h1 class="title">Todo List</h1>
+
+		<div class="newinput-box">
+			<%= form_with model: @task do |f| %>
+				<%= f.text_field :task, class: "input-area task-area", placeholder: "やること" %>
+				<%= f.date_field :date, class: "today input-area" %>
+				<%= f.time_field :time, class: "input-area" %>
+        <%= f.submit "追加", name: "task-btn", class: "task-btn btn" %>
+			<% end %>
+		</div>
+
+		<div class="input-box">
+			<h2 class="main-title">やること一覧</h2>
+			<table class="main-table">
+					<% @tasks.each do |t| %>
+						<% if t.email == current_user.email %>
+						<tr>
+							<td class="table-title"><%= t.task %></td>
+							<td class="table-daytime"><%= t.date %><span class="table-time"><%= t.time %></span></td>
+							<td>
+								<%= button_to "完了", "/#{t.id}", class: "complete-btn btn", method: :post %>
+							</td>
+							<td><a href="/<%= t.id %>" class="edit-btn btn">編集</a></td>
+							<td>
+								<%= button_to "削除", "/#{t.id}", class: "delete-btn btn", method: :delete %>
+							</td>
+						</tr>
+						<% end %>
+					<% end %>
+			</table>
+		</div><!-- .input-box -->
+
+		<div class="complete-box">
+		<h2 class="complete-main--title">完了済み</h2>
+			<table class="complete-table">
+			<% @completes.each do |c| %>
+				<% if Date.current.strftime('%Y年%m月%d日') == c.updated_at.strftime('%Y年%m月%d日') %>
+					<tr>
+						<td class="table-title"><span class="check">✓</span><%= c.task %></td>
+						<td class="table-daytime"><%= c.date %><span class="table-time"><%= c.time %></span></td>
+					</tr>
+				<% end %>
+			<% end %>
+			</table>
+		</div>
+
+	</div><!-- .box-inner -->
+</div><!-- .box -->

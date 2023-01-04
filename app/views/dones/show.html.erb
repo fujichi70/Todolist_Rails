@@ -1,0 +1,39 @@
+<div class="box">
+	<div class="box-inner">
+		<h1 class="title">Done List</h1>
+
+		<form method="post" action="/dones/<%= @done.id %>" data-turbo=false>
+			<input type="hidden" name="_method" value="put">
+			<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+			<div class="edit-box">
+				<h2 class="main-title">編集画面</h2>
+
+				<ul>
+					<li>
+						<label for="done">やったこと</label>
+						<input class="input-area done-area" value="<%= @done.done %>" id="done" name="done" type="text">
+					</li>
+					<li>
+						<label>Day</label>
+						<input type="date" name="date" class="input-area" value="<%= @done.date %>">
+					</li>
+					<li>
+						<label>Start Time</label>
+						<input type="time" name="start_time" class="input-area" value="<%= @done.start_time %>">
+						<label>End Time</label>
+						<input type="time" name="end_time" class="input-area" value="<%= @done.end_time %>">
+					<li>
+					<li>
+						<label>Description</label>
+						<input type="text" name="description" class="input-area" value="<%= @done.description %>">
+					</li>
+				</ul>
+				<input type="submit" class="btn" value="更新">
+				<%= link_to dones_path, data: {"turbo" => false} do %>
+					<input type="button" class="back-btn btn" value="戻る">
+				<% end %>
+			</div>
+		</form>
+
+	</div>
+</div>

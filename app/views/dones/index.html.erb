@@ -1,0 +1,93 @@
+<div class="box">
+	<div class="box-inner">
+		<h1 class="title">Done List</h1>
+
+		<div class="done-flex flex">
+			<div class="main-group">
+				<div class="input-box">
+				<h2 class="main-title done-main--title"><%= Time.current.strftime("%Y年%m月%d日") %></h2>
+					<div class="time-box">
+						<h2 class="time-title">現在の時刻</h2>
+						<div id="dateTime" class="datetime"></div>
+					</div>
+
+					<% @newDone.each do |n| %>
+						<div class="tmp-box">
+							<h2 class="tmp-main--title">取り掛かり中</h2>
+							<ul>
+								<li class="tmp-list tmp-title"><%= n.done %><% if !n.done.present? %>タイトルなし<% end %></li>
+							</ul>
+								<div class="tmp-date"><%= n.date %> <%= n.start_time %></div>
+							<%= form_with url: dones_path, method: :delete do |f| %>
+								<%= f.hidden_field :done_id, value: "#{n.done_id}" %>
+								<%= f.submit "取消", class: "delete-btn btn done-delete--btn", name: "delete-btn", data: { turbo: false } %>
+							<% end %>
+						</div>
+						<% if !n.done.present? %>
+						 <p class="tmp-notice">※やったことのタイトルを入れてから終了ボタンをクリックしてください。</p>
+						<% end %>
+					<% end %>
+
+
+					<%= form_with url: dones_start_path do |f| %>
+						<div class="newinput-box">
+							<%= f.text_field :done, class: "input-area done-area", placeholder: "やったこと" %>
+							<%= f.text_field :description, class: "input-area", placeholder: "詳細" %>
+							<% if !@newDone.present? %>
+								<%= f.hidden_field :done_id, value: SecureRandom.hex(6) %>
+  							<%= f.submit "開始", name: "start-btn", id: "startBtn", class: "task-btn btn is-active" %>
+							<% else %>
+								<% @newDone.each do |id| %>
+									<%= f.hidden_field :keep_id, value: id.done_id %>
+  							<%= f.submit "終了", name: "end-btn", id: "endBtn", class: "task-btn end-btn btn", formaction: dones_end_path %>
+								<% end %>
+							<% end %>
+						</div>
+					<% end %>
+				</div>
+
+			</div><!-- .main-group -->
+
+			<div class="done-box">
+				<h2 class="main-title done-main--title"><span class="done-day">今日のやったこと一覧</h2>
+				<% @done.each do |d| %>
+					<ul>
+						<li class="done-title"><%= d.done %></li>
+						<li class="done-daytime"><%= d.start_time %> ～ <%= d.end_time %></li>
+						<li><a href="dones/<%= d.id %>" class="edit-btn btn" data-turbo=false>編集</a></li>
+						<li>
+							<%= button_to "削除", "dones/#{d.id}", class: "delete-btn btn", method: :delete %>
+						</li>
+					</ul>
+				<% end %>
+			</div><!-- .done-box -->
+		</div><!-- .done-flex -->
+
+		<div class="add-box">
+			<p class="add-title">別にやったことを入力</p>
+			<div class="input-box">
+				<%= form_with url: dones_add_path do |f| %>
+					<%= f.text_field :done, class: "input-area done-area", placeholder: "やったこと" %>
+					<%= f.date_field :date, class: "today input-area" %>
+					<%= f.time_field :start_time, class: "input-area" %>
+					<%= f.time_field :end_time, class: "input-area" %>
+					<%= f.text_field :description, class: "input-area", placeholder: "詳細" %>
+					<%= f.hidden_field :done_id, value: SecureRandom.hex(6) %>
+					<%= f.submit "追加", class: "add-btn btn", name: "add_btn" %>
+				<% end %>
+			</div>
+		</div>
+
+		<div class="other-box">
+			<p class="other-title">他メニュー</p>
+			<div class="btn-box">
+			<%= link_to done_watch_path do %>
+				<input type="button" class="watch-btn btn" value="過去のやったことを確認">
+			<% end %>
+				<%= link_to csv_path do %>
+					<input type="button" class="btn" value="csv出力">
+				<% end %>
+			</div>
+		</div>
+	</div><!-- .box-inner -->
+</div><!-- .box -->

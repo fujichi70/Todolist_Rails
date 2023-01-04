@@ -1,0 +1,23 @@
+.csv-btn--box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.csv-btn--box .btn {
+    margin: 0 10px;
+}
+
+.selectdate-box {
+    margin: 40px 0;
+}
+
+select {
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.watch-btn--box {
+    margin-top: 20px;
+}

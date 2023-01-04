@@ -1,0 +1,164 @@
+/* レイアウト */
+.done-flex.flex {
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.done-flex .input-box {
+    margin: 0 0 30px;
+}
+
+.input-box .newinput-box .input-area {
+    display: block;
+    margin: 10px 0;
+}
+
+.input-box .newinput-box .task-btn {
+    font-size: 1.3rem;
+    padding: 10px 15px;
+}
+
+/* 時間 */
+.time-box {
+    border: 2px solid #548ccd;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 150px;
+    font-size: 1.45rem;
+    margin: 0 auto 30px;
+}
+
+.time-box .time-title {
+    display: inline-block;
+    margin: 10px;
+}
+
+.time-box .datetime {
+    font-size: 1.7rem;
+    display: inline-block;
+    margin: 10px 0;
+}
+
+.end-btn {
+    border: 1px solid #d10000;
+    color: #d10000;
+}
+
+.end-btn:hover {
+    background-color: #d10000;
+}
+
+/* 取り掛かり中 */
+.tmp-box {
+    display: inline-block;
+    margin-top: 10px;
+    border: 1px solid #548ccd;
+    position: relative;
+    padding: 10px 0;
+    min-width: 200px;
+}
+
+.tmp-main--title {
+    white-space: nowrap;
+    font-size: 1.2rem;
+    background-color: #548ccd;
+    color: #fff;
+    padding: 0 20px;
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.tmp-title {
+    font-size: 1.1rem;
+    margin: 30px 0 10px;
+    font-weight: bold;
+}
+
+.tmp-date {
+    margin-bottom: 10px;
+}
+
+.tmp-notice {
+    font-size: 0.75rem;
+    max-width: 204px;
+    margin: 0 0 10px 7px;
+}
+
+/* 別途やったことを追加 */
+.add-box .input-box {
+    margin: 15px 0 40px;
+}
+
+.add-title {
+    margin-bottom: 10px;
+}
+
+/* やったこと一覧 */
+.main-title.done-main--title {
+    font-weight: bold;
+    text-align: left;
+    font-size: 1.3rem;
+}
+
+.done-day {
+    font-size: 1.3rem;
+    margin-right: 10px;
+}
+
+.done-title {
+    list-style: circle;
+}
+
+.done-box ul {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.done-box li {
+    text-align: left;
+    margin: 0 10px 10px;
+}
+
+/* 他メニュー */
+.btn-box {
+    display: flex;
+    justify-content: center;
+}
+
+.other-title {
+  margin-bottom: 15px;
+}
+
+.btn-box .btn{
+    border: 1px solid #00b126;
+    color: #00b126;
+    margin: 0 10px;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+.btn-box .btn:hover {
+    color: #fff;
+    background-color: #00b126;
+}
+
+@media screen and (max-width: 890px) {
+    .done-flex.flex {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 590px) {
+    .input-box {
+        margin-bottom: 50px;
+    }
+}

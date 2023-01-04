@@ -1,0 +1,25 @@
+<div class="box">
+	<div class="box-inner">
+		<h1 class="title">Todo List</h1>
+
+		<h2 class="devise-sub-title">パスワード再設定</h2>
+
+		<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }, data: { turbo: false }) do |f| %>
+		<%= render "devise/shared/error_messages", resource: resource %>
+
+		<div class="devise-email forgot-flex">
+			<%= f.label :email, "e-mail", class: "devise-text" %><br />
+			<%= f.email_field :email, autofocus: true, autocomplete: "email", class: "devise-input--area" %>
+		</div>
+
+		<div class="submit-box forgot-btn">
+			<div class="newuser-btn--parts"><%= f.submit "パスワードを再設定するメールを送付", class: "btn" %></div>
+		</div>
+		<% end %>
+
+		<div class="move-btn--box">
+			<div class="submit-btn--parts"><%= link_to "アカウントを作成", new_user_registration_path, class: "btn" %></div>
+			<div class="submit-btn--parts"><%= link_to "ログイン", new_user_session_path, class: "btn" %></div>
+		</div>
+	</div>
+</div>
